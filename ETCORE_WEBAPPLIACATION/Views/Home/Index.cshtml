@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var products = ViewData["Products"] as List<Products>;
+}
+
+<div class="wrapper">
+    <div class="container">
+        <div class="row g-1">
+            @foreach (Products products1 in products)
+            {
+                string parthfirst = null;
+                if (products1.image != null)
+                {
+                    parthfirst = products1.image.Split(";")[0].ToString();
+                }
+                var pathinfo = "~/images/" + (parthfirst ?? "noimage.jpg");
+                <div class="col-md-3">
+                    <div class="card p-3">
+                        <div class="text-center">
+                            <a asp-action="Detail" asp-route-id="@products1.ProId" asp-controller="Home"><img src="@pathinfo" width="200" asp-append-version="true"></a>
+                            @Html.ActionLink("Detail", "Detail", "Home", new { id = products1.ProId })
+                            <a href="@Url.Action("Detail","Home",new { id= products1.ProId })" class="btn btn-primary">Show</a>
+                        </div>
+                        <div class="product-details">
+                            <span class="font-weight-bold d-block">$ 7.00</span> <span>@products1.ProName</span>
+                            <div class="buttons d-flex flex-row">
+                                <div class="cart"><i class="fa fa-shopping-cart"></i></div> <button class="btn btn-success cart-button btn-block"><span class="dot">1</span>Add to cart </button>
+                            </div>
+                            <div class="weight"> <small>1 piece 2.5kg</small> </div>
+                        </div>
+                        <a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Register">Add Product</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
