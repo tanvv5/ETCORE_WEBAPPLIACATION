@@ -152,3 +152,4 @@ D:\NETCORE\ETCORE_WEBAPPLIACATION\ETCORE_WEBAPPLIACATION\obj\Debug\netcoreapp3.1
 D:\NETCORE\ETCORE_WEBAPPLIACATION\ETCORE_WEBAPPLIACATION\obj\Debug\netcoreapp3.1\Razor\Views\Administrator\ManagementClaim.cshtml.g.cs
 D:\NETCORE\ETCORE_WEBAPPLIACATION\ETCORE_WEBAPPLIACATION\obj\Debug\netcoreapp3.1\Razor\Views\Administrator\AccessDenied.cshtml.g.cs
 D:\NETCORE\ETCORE_WEBAPPLIACATION\ETCORE_WEBAPPLIACATION\obj\Debug\netcoreapp3.1\ETCORE_WEBAPPLIACATION.csprojAssemblyReference.cache
+D:\NETCORE\ETCORE_WEBAPPLIACATION\ETCORE_WEBAPPLIACATION\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Google.dll

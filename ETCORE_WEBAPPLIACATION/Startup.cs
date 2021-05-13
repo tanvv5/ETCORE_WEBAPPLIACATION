@@ -66,6 +66,13 @@ namespace ETCORE_WEBAPPLIACATION
                 option.AccessDeniedPath = new PathString("/Administrator/AccessDenied");
             });
             services.AddSingleton<IAuthorizationHandler, CanEditOnlyAdminRoleAndClaimHandler>();
+            //add login by google authorization
+            services.AddAuthentication()
+                .AddGoogle(option =>
+                {
+                    option.ClientId = "227744340290-ue3ogjpdpm54lgbsokcb6q5mrhgak5lc.apps.googleusercontent.com";
+                    option.ClientSecret = "8LYDtumzrlXgJkGWQDFNnFHZ";
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

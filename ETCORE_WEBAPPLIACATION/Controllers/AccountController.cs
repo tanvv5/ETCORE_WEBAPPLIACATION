@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace ETCORE_WEBAPPLIACATION.Controllers
 {
@@ -67,7 +68,7 @@ namespace ETCORE_WEBAPPLIACATION.Controllers
                 var result = _userManager.CreateAsync(user, registerViewModel.Password);
                 if (result.Result.Succeeded)
                 {
-                    if(_signInManager.IsSignedIn(User)&& User.IsInRole("Admin"))
+                    if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {
                         return RedirectToAction("ListUser", "Administrator");
                     }
@@ -89,9 +90,14 @@ namespace ETCORE_WEBAPPLIACATION.Controllers
         }
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Login()
+        public async Task<ActionResult> Login(string returnUrl = "")
         {
-            return View();
+            LoginViewModel loginViewModel = new LoginViewModel
+            {
+                ReturnUrl = returnUrl,
+                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
+            return View(loginViewModel);
         }
         [HttpPost]
         [AllowAnonymous]
@@ -132,7 +138,7 @@ namespace ETCORE_WEBAPPLIACATION.Controllers
         public async Task<ActionResult> Edit(string id)
         {
             ApplicationUserEditModel useredit1 = new ApplicationUserEditModel();
-            var user1 = await _userManager.FindByIdAsync(id??"");
+            var user1 = await _userManager.FindByIdAsync(id ?? "");
             useredit1.Avartar = user1.Avartar;
             useredit1.Email = user1.Email;
             useredit1.Depathment = user1.Depathment;
@@ -158,14 +164,14 @@ namespace ETCORE_WEBAPPLIACATION.Controllers
                     ueredit.Avartar = fullnamefile;
                     ueredit.Depathment = _user.Depathment;
                 }
-                
+
                 var result = await _userManager.UpdateAsync(ueredit);
                 if (result.Succeeded)
                 {
                     //xóa file cũ
                     if (_user.Avartar != null)
                     {
-                        string oldPath = Path.Combine(_hostingEnvironment1.WebRootPath  + FilepathOld);
+                        string oldPath = Path.Combine(_hostingEnvironment1.WebRootPath + FilepathOld);
                         System.IO.File.Delete(oldPath);
                     }
                     return RedirectToAction("Index", "Account");
@@ -190,7 +196,69 @@ namespace ETCORE_WEBAPPLIACATION.Controllers
                 _user1.image.CopyTo(new FileStream(filepath, FileMode.Create));
             }
 
-            return "\\images\\Avarta\\"+UniqueFilename;
+            return "\\images\\Avarta\\" + UniqueFilename;
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult ExternalLogin(string provider, string returnUrl)
+        {
+            var redirectUrl = Url.Action("ExtenelLoginCallback", "Account", new { ReturnUrl = returnUrl });
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return new ChallengeResult(provider, properties);
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExtenelLoginCallback(string returnUrl = null, string ErrorRemote = null)
+        {
+            returnUrl = returnUrl ?? Url.Content("~/");
+            LoginViewModel loginViewModel = new LoginViewModel
+            {
+                ReturnUrl = returnUrl,
+                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
+            if (ErrorRemote != null)
+            {
+                ModelState.AddModelError(string.Empty, $"Error from External provider: {ErrorRemote}");
+                return View("Login", loginViewModel);
+            }
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
+            {
+                ModelState.AddModelError(string.Empty, $"Error Loading External login infomation");
+                return View("Login", loginViewModel);
+            }
+            var signInResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey
+                , isPersistent: false, bypassTwoFactor: true);
+            if (signInResult.Succeeded)
+            {
+                return LocalRedirect(returnUrl);
+            }
+            else
+            {
+                //lấy thông tin email mà người dùng nhập để login nếu chưa có thì tạo 1 tài khoản luôn, nhưng password trống
+                //người dùng sẽ có 1 chức năng khác đổi pass hoặc lần sau sẽ phải đăng nhập bằng google tiếp thôi
+                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+                if (email != null)
+                {
+                    var user = await _userManager.FindByEmailAsync(email);
+                    if (user == null)
+                    {
+                        user = new ApplicationUser
+                        {
+                            UserName = email,
+                            Email = email
+                        };
+                        await _userManager.CreateAsync(user);
+                    }
+                    await _userManager.AddLoginAsync(user, info);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //đăng nhập hệ thống
+                    return LocalRedirect(returnUrl);
+                }
+                ViewBag.ErrorTitle = "";
+                ViewBag.ErrorMessage = "Please contact support via email tan.hondacuoi@gmail.com";
+                return View("Error");
+            }
         }
     }
 }
