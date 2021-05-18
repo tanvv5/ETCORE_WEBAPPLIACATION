@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service.service';
 import { User } from '../_models';
 
@@ -8,10 +10,9 @@ import { User } from '../_models';
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
-export class NavMenuComponent {
+export class NavMenuComponent implements OnInit {
   isExpanded = false;
-  currentUser: User;
-  isLoggedIn: boolean=false;   
+  isLoggedIn: boolean;
   collapse() {
     this.isExpanded = false;
   }
@@ -24,9 +25,13 @@ export class NavMenuComponent {
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    if (this.currentUser)
-      this.isLoggedIn = true;
+  }
+  ngOnInit() {
+/*    this.isLoggedIn = this.authenticationService.isLoggedIn; console.log("ko fff: " + this.isLoggedIn);*/
+    this.authenticationService.isLoggedIn.subscribe(data => {
+      this.isLoggedIn=data;
+      console.log("isLoggedIn menu: " + data);
+    });
   }
   logout() {
     this.authenticationService.logout();

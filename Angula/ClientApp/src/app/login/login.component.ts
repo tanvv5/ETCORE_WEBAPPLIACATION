@@ -20,9 +20,11 @@ export class LoginComponent implements OnInit {
     private alertService: AlertService
   ) {
     //redirect to home if already logged in
-    //if (this.authenticationService.currentUserValue) {
-    //  this.router.navigate(['/']);
-    //}
+    this.authenticationService.isLoggedIn.subscribe(data => {
+      if (data) {
+        this.router.navigate(['/']);
+      }
+    });
   }
 
   ngOnInit() {
@@ -50,24 +52,15 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    var result = this.authenticationService.login(this.f.username.value, this.f.password.value);
-    if (localStorage.getItem('token')) {
-      console.log("Check login get token: " + localStorage.getItem('token'));
-      this.router.navigate([this.returnUrl]);
-    }
-    else {
-      this.loading = false;
-      return;
-    }
-    //this.authenticationService.login(this.f.username.value, this.f.password.value)
-    //  .pipe()
-    //  .subscribe(
-    //    data => {
-    //      this.router.navigate([this.returnUrl]);
-    //    },
-    //    error => {
-    //      this.alertService.error(error);
-    //      this.loading = false;
-    //    });
+    this.authenticationService.login(this.f.username.value, this.f.password.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate([this.returnUrl]);
+        },
+        error => {
+          this.alertService.error(error);
+          this.loading = false;
+        });
   }
 }

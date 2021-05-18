@@ -12,8 +12,8 @@ export class UserService {
   getAll() {
     let header = new HttpHeaders().set(
       "Authorization",
-      "Bearer " + localStorage.getItem('token'))
-    return this.http.get<User[]>(`${environment.ApiUrl}api/UserInfo`, { headers: header });
+      "Bearer ".concat(localStorage.getItem('token')))
+    return this.http.get<any>(`${environment.ApiUrl}api/UserInfo`, { headers: header });
   }
 
   getToken(password: string, userName: string) {
@@ -24,7 +24,7 @@ export class UserService {
   }
 
   register(user: User) {
-    return this.http.post(`${environment.ApiUrl}users/register`, user);
+    return this.http.post(`${environment.ApiUrl}api/UserInfo`, user);
   }
 
   delete(id: number) {

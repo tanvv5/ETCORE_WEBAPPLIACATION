@@ -13,6 +13,7 @@ import { VantanLearningAngularcomponent } from './vantan/VantanLearningAngular.c
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { LoginComponent } from './login/login.component';
 import { AlertComponent } from './_share/alert.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -25,7 +26,7 @@ import { AlertComponent } from './_share/alert.component';
     FetchDataComponent,
     VantanLearningAngularcomponent
     , JwPaginationComponent, LoginComponent
-    , AlertComponent
+    , AlertComponent, RegisterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -36,7 +37,8 @@ import { AlertComponent } from './_share/alert.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'vantan', component: VantanLearningAngularcomponent },
-      { path: 'login', component: LoginComponent }
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent }
     ])
   ],
   providers: [],

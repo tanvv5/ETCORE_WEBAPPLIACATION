@@ -1,8 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+import { AuthenticationService } from '../services/authentication.service.service';
 import { UserService } from '../services/user.service.service';
 import { User } from '../_models';
+import { Response } from '../_models/Response';
 import { AppSettings } from '../_share/AppSettings';
 
 @Component({
@@ -16,6 +19,7 @@ export class VantanLearningAngularcomponent implements OnInit  {
     website: 'Angular van tan'
   }
   public users: User[];
+  public response: Response;
   //public users: any[] = [];
   public incrementCounter() {
     this.currentCount++;
@@ -26,13 +30,23 @@ export class VantanLearningAngularcomponent implements OnInit  {
   //phân trang cho dữ liệu get json từ API
   public curPage: number;
   public pageSize: number;
-  constructor(private http: HttpClient, private userService: UserService) {
-    //this.getProduct();
+  isLoggedIn: boolean;
+  constructor(private http: HttpClient, private userService: UserService, private authenticationService: AuthenticationService, private router: Router) {
+    this.authenticationService.isLoggedIn.subscribe(data => {
+      this.isLoggedIn = data;
+      if (this.isLoggedIn==false) {
+        this.router.navigate(['/login']);
+      }
+    });
   }
   ngOnInit() {
     this.userService.getAll().subscribe(result => {
-      this.users = result;
-      console.log("User get api 1:" + this.users[0].UserName);
+      var obj = JSON.parse(JSON.stringify(result));
+      this.response = new Response();
+      this.response.Message = obj.Message;
+      this.response.ErrorMessage = obj.ErrorMessage;
+      this.response.DidError = obj.DidError;
+      this.users = JSON.parse(JSON.stringify(obj.Model));
     }, error => console.log(error));
     // an example array of 150 items to be paged
     this.items = Array(150).fill(0).map((x, i) => ({ id: (i + 1), name: `Item ${i + 1}` }));
@@ -47,15 +61,6 @@ export class VantanLearningAngularcomponent implements OnInit  {
     this.pageOfItems = pageOfItems;
     console.log(pageOfItems);
   }
-  //public getToken() {
-  //  const body = {Password:'Vantan@2125',UserName:};
-  //  const header = { 'content-type': 'application/json', 'Accept': 'application/json'};
-  //  console.log("token body: " + body);
-  //  return this.http.post<string>(`${environment.ApiUrl}api/Token` body, { headers: header }).subscribe(result => {
-  //    localStorage.setItem('id_token', result);
-  //    console.log("token get api: " + result);
-  //  }, error => console.log(error));
-  //}
   public getProduct() {    
     let header = new HttpHeaders().set(
       "Authorization",
