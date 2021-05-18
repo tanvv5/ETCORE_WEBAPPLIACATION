@@ -1,4 +1,5 @@
-﻿using ETCORE_WEBAPPLIACATION.Models;
+﻿using ETCORE_WEBAPPLIACATION.Data;
+using ETCORE_WEBAPPLIACATION.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,14 +13,17 @@ namespace ETCORE_WEBAPPLIACATION.Controllers
     {
         // GET: Products
         private IProductsRepository _productsRepository;
-        public ProductsController(IProductsRepository productsRepository)
+        private UserRespository _userRespository;
+        public ProductsController(IProductsRepository productsRepository, UserRespository userRespository)
         {
             _productsRepository = productsRepository;
+            _userRespository = userRespository;
         }
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             ViewBag.Title = "Trang sản phẩm";
-            List<Products> _products = _productsRepository.GetALLProducts();
+            //List<Products> _products = _productsRepository.GetALLProducts();
+            List<Products> _products = await _userRespository.GetAllProduct();
             return View(_products);
         }
 

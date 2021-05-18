@@ -1,4 +1,5 @@
-﻿using ETCORE_WEBAPPLIACATION.Models;
+﻿using ETCORE_WEBAPPLIACATION.Data;
+using ETCORE_WEBAPPLIACATION.Models;
 using ETCORE_WEBAPPLIACATION.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -73,6 +74,8 @@ namespace ETCORE_WEBAPPLIACATION
                     option.ClientId = "227744340290-ue3ogjpdpm54lgbsokcb6q5mrhgak5lc.apps.googleusercontent.com";
                     option.ClientSecret = "8LYDtumzrlXgJkGWQDFNnFHZ";
                 });
+            //add scopt moi
+            services.AddScoped<UserRespository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

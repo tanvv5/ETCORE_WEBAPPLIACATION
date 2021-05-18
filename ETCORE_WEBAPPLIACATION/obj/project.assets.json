@@ -35,18 +35,6 @@
           "lib/netcoreapp2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {}
         }
       },
-      "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Text.Encodings.Web": "4.5.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Html.Abstractions.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Html.Abstractions.dll": {}
-        }
-      },
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore/3.1.0": {
         "type": "package",
         "dependencies": {
@@ -58,40 +46,6 @@
         },
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll": {}
-        }
-      },
-      "Microsoft.AspNetCore.Razor/2.2.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Html.Abstractions": "2.2.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Razor.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Razor.dll": {}
-        }
-      },
-      "Microsoft.AspNetCore.Razor.Language/3.1.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Razor.Language.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Razor.Language.dll": {}
-        }
-      },
-      "Microsoft.AspNetCore.Razor.Runtime/2.2.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Html.Abstractions": "2.2.0",
-          "Microsoft.AspNetCore.Razor": "2.2.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Razor.Runtime.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Razor.Runtime.dll": {}
         }
       },
       "Microsoft.Bcl.AsyncInterfaces/1.1.0": {
@@ -283,20 +237,6 @@
           "lib/netstandard2.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll": {
             "locale": "zh-Hant"
           }
-        }
-      },
-      "Microsoft.CodeAnalysis.Razor/3.1.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Razor.Language": "3.1.0",
-          "Microsoft.CodeAnalysis.CSharp": "3.3.0",
-          "Microsoft.CodeAnalysis.Common": "3.3.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.CodeAnalysis.Razor.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.CodeAnalysis.Razor.dll": {}
         }
       },
       "Microsoft.CodeAnalysis.Workspaces.Common/3.3.1": {
@@ -676,20 +616,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.VisualStudio.Web.CodeGeneration/3.1.5": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "3.1.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore": "3.1.5"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.dll": {}
-        }
-      },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Contracts/3.1.5": {
+      "Microsoft.VisualStudio.Web.CodeGeneration.Contracts/3.1.0": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "11.0.2"
@@ -701,65 +628,11 @@
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll": {}
         }
       },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Core/3.1.5": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "3.1.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Templating": "3.1.5",
-          "Newtonsoft.Json": "11.0.2"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Core.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Core.dll": {}
-        }
-      },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design/3.1.5": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": "3.1.5"
-        },
-        "compile": {
-          "lib/netcoreapp3.1/dotnet-aspnet-codegenerator-design.dll": {}
-        },
-        "runtime": {
-          "lib/netcoreapp3.1/dotnet-aspnet-codegenerator-design.dll": {}
-        }
-      },
-      "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore/3.1.5": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.VisualStudio.Web.CodeGeneration.Core": "3.1.5"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll": {}
-        }
-      },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Templating/3.1.5": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Razor.Language": "3.1.0",
-          "Microsoft.AspNetCore.Razor.Runtime": "2.2.0",
-          "Microsoft.CodeAnalysis.CSharp": "3.3.1",
-          "Microsoft.CodeAnalysis.Razor": "3.1.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Utils": "3.1.5"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll": {}
-        }
-      },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Utils/3.1.5": {
+      "Microsoft.VisualStudio.Web.CodeGeneration.Utils/3.1.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "3.3.1",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Contracts": "3.1.5",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Contracts": "3.1.0",
           "Newtonsoft.Json": "11.0.2",
           "NuGet.Frameworks": "4.7.0"
         },
@@ -768,18 +641,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll": {}
-        }
-      },
-      "Microsoft.VisualStudio.Web.CodeGenerators.Mvc/3.1.5": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.VisualStudio.Web.CodeGeneration": "3.1.5"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll": {}
         }
       },
       "Microsoft.Win32.Primitives/4.3.0": {
@@ -2442,15 +2303,6 @@
           "ref/netstandard1.3/System.Text.Encoding.Extensions.dll": {}
         }
       },
-      "System.Text.Encodings.Web/4.5.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/System.Text.Encodings.Web.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/System.Text.Encodings.Web.dll": {}
-        }
-      },
       "System.Text.RegularExpressions/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2652,19 +2504,6 @@
         "microsoft.aspnetcore.cryptography.keyderivation.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
-      "sha512": "Y4rs5aMEXY8G7wJo5S3EEt6ltqyOTr/qOeZzfn+hw/fuQj5GppGckMY5psGLETo1U9hcT5MmAhaT5xtusM1b5g==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.html.abstractions/2.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Html.Abstractions.dll",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Html.Abstractions.xml",
-        "microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
-        "microsoft.aspnetcore.html.abstractions.nuspec"
-      ]
-    },
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore/3.1.0": {
       "sha512": "aH7iLcveq4MoL4/NBD2ZxhNWHEi7N6LwFyLRHTzMN01NXkahJZXLP7Un4UgPcpaRlm3GsKcIfDJHD/MhW6OACg==",
       "type": "package",
@@ -2679,46 +2518,6 @@
         "lib/netstandard2.1/Microsoft.AspNetCore.Identity.EntityFrameworkCore.xml",
         "microsoft.aspnetcore.identity.entityframeworkcore.3.1.0.nupkg.sha512",
         "microsoft.aspnetcore.identity.entityframeworkcore.nuspec"
-      ]
-    },
-    "Microsoft.AspNetCore.Razor/2.2.0": {
-      "sha512": "V54PIyDCFl8COnTp9gezNHpUNHk7F9UnerGeZy3UfbnwYvfzbo+ipqQmSgeoESH8e0JvKhRTyQyZquW2EPtCmg==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.razor/2.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Razor.dll",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Razor.xml",
-        "microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
-        "microsoft.aspnetcore.razor.nuspec"
-      ]
-    },
-    "Microsoft.AspNetCore.Razor.Language/3.1.0": {
-      "sha512": "e/atqZ5CzmJWuG/yaYOzbWNON+oqNKfk1M/xTYW+hje/RoiUUjVP88wrX1s9rEHzaAU4UljIOSvMxLABc2X2gg==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.razor.language/3.1.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Razor.Language.dll",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Razor.Language.xml",
-        "microsoft.aspnetcore.razor.language.3.1.0.nupkg.sha512",
-        "microsoft.aspnetcore.razor.language.nuspec",
-        "packageIcon.png"
-      ]
-    },
-    "Microsoft.AspNetCore.Razor.Runtime/2.2.0": {
-      "sha512": "7YqK+H61lN6yj9RiQUko7oaOhKtRR9Q/kBcoWNRemhJdTIWOh1OmdvJKzZrMWOlff3BAjejkPQm+0V0qXk+B1w==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.razor.runtime/2.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Razor.Runtime.dll",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Razor.Runtime.xml",
-        "microsoft.aspnetcore.razor.runtime.2.2.0.nupkg.sha512",
-        "microsoft.aspnetcore.razor.runtime.nuspec"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.0": {
@@ -2925,20 +2724,6 @@
         "lib/netstandard2.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll",
         "microsoft.codeanalysis.csharp.workspaces.3.3.1.nupkg.sha512",
         "microsoft.codeanalysis.csharp.workspaces.nuspec"
-      ]
-    },
-    "Microsoft.CodeAnalysis.Razor/3.1.0": {
-      "sha512": "EI/9iVMneil8nZn7mqEujJvV63VRaz01Czc69NTrCQAh5CRfBvoeqBVsDx6oC9CIYla/AJYss+U4B/6Usecx7A==",
-      "type": "package",
-      "path": "microsoft.codeanalysis.razor/3.1.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.CodeAnalysis.Razor.dll",
-        "lib/netstandard2.0/Microsoft.CodeAnalysis.Razor.xml",
-        "microsoft.codeanalysis.razor.3.1.0.nupkg.sha512",
-        "microsoft.codeanalysis.razor.nuspec",
-        "packageIcon.png"
       ]
     },
     "Microsoft.CodeAnalysis.Workspaces.Common/3.3.1": {
@@ -3470,414 +3255,32 @@
         "runtime.json"
       ]
     },
-    "Microsoft.VisualStudio.Web.CodeGeneration/3.1.5": {
-      "sha512": "KSXhD6QzyoyNc52blbf5DJ7QNtul1VXcpOcYO5svlbFRRWjcB3+lpYTr5n9I6fcgMDGkhb4mndLZuXSTz0ukaA==",
+    "Microsoft.VisualStudio.Web.CodeGeneration.Contracts/3.1.0": {
+      "sha512": "VkK8dUAMczEA7I8Min2A32KvmqsQxELabhqedDKyI+CcJ3omDNa7nL/eDwwp9UGobdnBnIVaqjULeQJpUYkkaQ==",
       "type": "package",
-      "path": "microsoft.visualstudio.web.codegeneration/3.1.5",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.dll",
-        "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.xml",
-        "microsoft.visualstudio.web.codegeneration.3.1.5.nupkg.sha512",
-        "microsoft.visualstudio.web.codegeneration.nuspec"
-      ]
-    },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Contracts/3.1.5": {
-      "sha512": "mwtlStv7cvgmOC7zM9ZGV/9KN5gtYpDW1w0oOx675nPT/CECsftaCBRfxP0D3Ho8bj1+UgiI7hVLwyYud58E9g==",
-      "type": "package",
-      "path": "microsoft.visualstudio.web.codegeneration.contracts/3.1.5",
+      "path": "microsoft.visualstudio.web.codegeneration.contracts/3.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll",
         "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Contracts.xml",
-        "microsoft.visualstudio.web.codegeneration.contracts.3.1.5.nupkg.sha512",
+        "microsoft.visualstudio.web.codegeneration.contracts.3.1.0.nupkg.sha512",
         "microsoft.visualstudio.web.codegeneration.contracts.nuspec"
       ]
     },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Core/3.1.5": {
-      "sha512": "VWSQrOR9ayVTe7tv1IghlyRCdxVHt3cFBH3p1gmDaF1wNHwFfFJvZ3NT6HeqeNqysLftvQdJKVmRckfoaOuqMQ==",
+    "Microsoft.VisualStudio.Web.CodeGeneration.Utils/3.1.0": {
+      "sha512": "52c9OMBHxfJmRt0993W7BCAjZQmLqCmt0lpbFe2ecKSPuW5uZstXlNSUbv+vV9QUvcRRiKDdiWv/y98a2q/Qfw==",
       "type": "package",
-      "path": "microsoft.visualstudio.web.codegeneration.core/3.1.5",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Core.dll",
-        "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Core.xml",
-        "microsoft.visualstudio.web.codegeneration.core.3.1.5.nupkg.sha512",
-        "microsoft.visualstudio.web.codegeneration.core.nuspec"
-      ]
-    },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Design/3.1.5": {
-      "sha512": "OtcAfUxX/etRLVIVEk5PpVt1hChZosqNKkhLjLuubdpCIX5P7OCihVScYMzdjXfvD3tNkWcNed2nvpLd61wBYA==",
-      "type": "package",
-      "path": "microsoft.visualstudio.web.codegeneration.design/3.1.5",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net461/dotnet-aspnet-codegenerator-design.exe",
-        "lib/net461/dotnet-aspnet-codegenerator-design.xml",
-        "lib/netcoreapp3.1/dotnet-aspnet-codegenerator-design.dll",
-        "lib/netcoreapp3.1/dotnet-aspnet-codegenerator-design.xml",
-        "microsoft.visualstudio.web.codegeneration.design.3.1.5.nupkg.sha512",
-        "microsoft.visualstudio.web.codegeneration.design.nuspec",
-        "runtimes/win-arm/lib/net461/dotnet-aspnet-codegenerator-design.exe",
-        "runtimes/win-arm/lib/net461/dotnet-aspnet-codegenerator-design.xml",
-        "runtimes/win-arm64/lib/net461/dotnet-aspnet-codegenerator-design.exe",
-        "runtimes/win-arm64/lib/net461/dotnet-aspnet-codegenerator-design.xml",
-        "runtimes/win7-x64/lib/net461/dotnet-aspnet-codegenerator-design.exe",
-        "runtimes/win7-x64/lib/net461/dotnet-aspnet-codegenerator-design.xml",
-        "runtimes/win7-x86/lib/net461/dotnet-aspnet-codegenerator-design.exe",
-        "runtimes/win7-x86/lib/net461/dotnet-aspnet-codegenerator-design.xml"
-      ]
-    },
-    "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore/3.1.5": {
-      "sha512": "7ABg+Xc56gxWlmId+vCAdf5sGY9+GZiBi2LB5epaufvoaww4n74zv+FzQUP0jApurmA0RDiJzQ8u8XL+Cl8VcQ==",
-      "type": "package",
-      "path": "microsoft.visualstudio.web.codegeneration.entityframeworkcore/3.1.5",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "Templates/DbContext/NewLocalDbContext.cshtml",
-        "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll",
-        "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.xml",
-        "microsoft.visualstudio.web.codegeneration.entityframeworkcore.3.1.5.nupkg.sha512",
-        "microsoft.visualstudio.web.codegeneration.entityframeworkcore.nuspec"
-      ]
-    },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Templating/3.1.5": {
-      "sha512": "fYdTlypZex1lkrZif924cp4StqzAXehIdgYiRXre7HpjnRVMH6dHWEW4n7vY2IAnXI3dmp+ekD10k6z98YLTwA==",
-      "type": "package",
-      "path": "microsoft.visualstudio.web.codegeneration.templating/3.1.5",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll",
-        "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Templating.xml",
-        "microsoft.visualstudio.web.codegeneration.templating.3.1.5.nupkg.sha512",
-        "microsoft.visualstudio.web.codegeneration.templating.nuspec"
-      ]
-    },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Utils/3.1.5": {
-      "sha512": "vSEMlRifsRn4VYoaqWcTeJvrKfKfuZZlMZblKWMUP/cwAAZkDweJqfA6E7trvcuRsyauQyEPsKicElqbZHRnzg==",
-      "type": "package",
-      "path": "microsoft.visualstudio.web.codegeneration.utils/3.1.5",
+      "path": "microsoft.visualstudio.web.codegeneration.utils/3.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll",
         "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Utils.xml",
-        "microsoft.visualstudio.web.codegeneration.utils.3.1.5.nupkg.sha512",
+        "microsoft.visualstudio.web.codegeneration.utils.3.1.0.nupkg.sha512",
         "microsoft.visualstudio.web.codegeneration.utils.nuspec"
-      ]
-    },
-    "Microsoft.VisualStudio.Web.CodeGenerators.Mvc/3.1.5": {
-      "sha512": "w1yGWLgGbZJ8Dz8+4CP4tlwIHpQ/ZaOLWHV0gZo2m1+yU6u/zo2z1Ro7/CHkVWVd04vievsN5UQ19lcWLSfqBw==",
-      "type": "package",
-      "path": "microsoft.visualstudio.web.codegenerators.mvc/3.1.5",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Generators/ParameterDefinitions/area.json",
-        "Generators/ParameterDefinitions/controller.json",
-        "Generators/ParameterDefinitions/identity.json",
-        "Generators/ParameterDefinitions/razorpage.json",
-        "Generators/ParameterDefinitions/view.json",
-        "Icon.png",
-        "Templates/ControllerGenerator/ApiControllerWithActions.cshtml",
-        "Templates/ControllerGenerator/ApiControllerWithContext.cshtml",
-        "Templates/ControllerGenerator/ApiEmptyController.cshtml",
-        "Templates/ControllerGenerator/ControllerWithActions.cshtml",
-        "Templates/ControllerGenerator/EmptyController.cshtml",
-        "Templates/ControllerGenerator/MvcControllerWithContext.cshtml",
-        "Templates/Identity/Data/ApplicationDbContext.cshtml",
-        "Templates/Identity/Data/ApplicationUser.cshtml",
-        "Templates/Identity/IdentityHostingStartup.cshtml",
-        "Templates/Identity/Pages/Account/Account.AccessDenied.cs.cshtml",
-        "Templates/Identity/Pages/Account/Account.AccessDenied.cshtml",
-        "Templates/Identity/Pages/Account/Account.ConfirmEmail.cs.cshtml",
-        "Templates/Identity/Pages/Account/Account.ConfirmEmail.cshtml",
-        "Templates/Identity/Pages/Account/Account.ConfirmEmailChange.cs.cshtml",
-        "Templates/Identity/Pages/Account/Account.ConfirmEmailChange.cshtml",
-        "Templates/Identity/Pages/Account/Account.ExternalLogin.cs.cshtml",
-        "Templates/Identity/Pages/Account/Account.ExternalLogin.cshtml",
-        "Templates/Identity/Pages/Account/Account.ForgotPassword.cs.cshtml",
-        "Templates/Identity/Pages/Account/Account.ForgotPassword.cshtml",
-        "Templates/Identity/Pages/Account/Account.ForgotPasswordConfirmation.cs.cshtml",
-        "Templates/Identity/Pages/Account/Account.ForgotPasswordConfirmation.cshtml",
-        "Templates/Identity/Pages/Account/Account.Lockout.cs.cshtml",
-        "Templates/Identity/Pages/Account/Account.Lockout.cshtml",
-        "Templates/Identity/Pages/Account/Account.Login.cs.cshtml",
-        "Templates/Identity/Pages/Account/Account.Login.cshtml",
-        "Templates/Identity/Pages/Account/Account.LoginWith2fa.cs.cshtml",
-        "Templates/Identity/Pages/Account/Account.LoginWith2fa.cshtml",
-        "Templates/Identity/Pages/Account/Account.LoginWithRecoveryCode.cs.cshtml",
-        "Templates/Identity/Pages/Account/Account.LoginWithRecoveryCode.cshtml",
-        "Templates/Identity/Pages/Account/Account.Logout.cs.cshtml",
-        "Templates/Identity/Pages/Account/Account.Logout.cshtml",
-        "Templates/Identity/Pages/Account/Account.Register.cs.cshtml",
-        "Templates/Identity/Pages/Account/Account.Register.cshtml",
-        "Templates/Identity/Pages/Account/Account.RegisterConfirmation.cs.cshtml",
-        "Templates/Identity/Pages/Account/Account.RegisterConfirmation.cshtml",
-        "Templates/Identity/Pages/Account/Account.ResendEmailConfirmation.cshtml",
-        "Templates/Identity/Pages/Account/Account.ResetPassword.cs.cshtml",
-        "Templates/Identity/Pages/Account/Account.ResetPassword.cshtml",
-        "Templates/Identity/Pages/Account/Account.ResetPasswordConfirmation.cs.cshtml",
-        "Templates/Identity/Pages/Account/Account.ResetPasswordConfirmation.cshtml",
-        "Templates/Identity/Pages/Account/Account._StatusMessage.cshtml",
-        "Templates/Identity/Pages/Account/Account._ViewImports.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.ChangePassword.cs.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.ChangePassword.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.DeletePersonalData.cs.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.DeletePersonalData.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.Disable2fa.cs.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.Disable2fa.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.DownloadPersonalData.cs.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.DownloadPersonalData.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.Email.cs.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.Email.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.EnableAuthenticator.cs.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.EnableAuthenticator.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.ExternalLogins.cs.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.ExternalLogins.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.GenerateRecoveryCodes.cs.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.GenerateRecoveryCodes.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.Index.cs.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.Index.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.ManageNavPages.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.PersonalData.cs.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.PersonalData.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.ResetAuthenticator.cs.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.ResetAuthenticator.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.SetPassword.cs.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.SetPassword.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.ShowRecoveryCodes.cs.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.ShowRecoveryCodes.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.TwoFactorAuthentication.cs.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage.TwoFactorAuthentication.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage._Layout.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage._ManageNav.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage._StatusMessage.cshtml",
-        "Templates/Identity/Pages/Account/Manage/Account.Manage._ViewImports.cshtml",
-        "Templates/Identity/Pages/Error.cs.cshtml",
-        "Templates/Identity/Pages/Error.cshtml",
-        "Templates/Identity/Pages/_Layout.cshtml",
-        "Templates/Identity/Pages/_ValidationScriptsPartial.cshtml",
-        "Templates/Identity/Pages/_ViewImports.cshtml",
-        "Templates/Identity/Pages/_ViewStart.cshtml",
-        "Templates/Identity/ScaffoldingReadme.cshtml",
-        "Templates/Identity/SupportPages._CookieConsentPartial.cshtml",
-        "Templates/Identity/SupportPages._ViewImports.cshtml",
-        "Templates/Identity/SupportPages._ViewStart.cshtml",
-        "Templates/Identity/_LoginPartial.cshtml",
-        "Templates/Identity/wwwroot/css/site.css",
-        "Templates/Identity/wwwroot/favicon.ico",
-        "Templates/Identity/wwwroot/js/site.js",
-        "Templates/Identity/wwwroot/lib/bootstrap/LICENSE",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
-        "Templates/Identity/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
-        "Templates/Identity/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
-        "Templates/Identity/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
-        "Templates/Identity/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
-        "Templates/Identity/wwwroot/lib/jquery-validation/LICENSE.md",
-        "Templates/Identity/wwwroot/lib/jquery-validation/dist/additional-methods.js",
-        "Templates/Identity/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
-        "Templates/Identity/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
-        "Templates/Identity/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
-        "Templates/Identity/wwwroot/lib/jquery/LICENSE.txt",
-        "Templates/Identity/wwwroot/lib/jquery/dist/jquery.js",
-        "Templates/Identity/wwwroot/lib/jquery/dist/jquery.min.js",
-        "Templates/Identity/wwwroot/lib/jquery/dist/jquery.min.map",
-        "Templates/Identity_Versioned/Bootstrap3/Data/ApplicationDbContext.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Data/ApplicationUser.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/IdentityHostingStartup.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.AccessDenied.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.AccessDenied.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.ConfirmEmail.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.ConfirmEmail.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.ConfirmEmailChange.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.ConfirmEmailChange.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.ExternalLogin.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.ExternalLogin.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.ForgotPassword.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.ForgotPassword.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.ForgotPasswordConfirmation.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.ForgotPasswordConfirmation.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.Lockout.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.Lockout.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.Login.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.Login.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.LoginWith2fa.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.LoginWith2fa.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.LoginWithRecoveryCode.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.LoginWithRecoveryCode.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.Logout.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.Logout.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.Register.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.Register.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.RegisterConfirmation.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.RegisterConfirmation.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.ResendEmailConfirmation.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.ResetPassword.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.ResetPassword.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.ResetPasswordConfirmation.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account.ResetPasswordConfirmation.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account._StatusMessage.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Account._ViewImports.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.ChangePassword.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.ChangePassword.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.DeletePersonalData.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.DeletePersonalData.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.Disable2fa.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.Disable2fa.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.DownloadPersonalData.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.DownloadPersonalData.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.Email.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.Email.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.EnableAuthenticator.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.EnableAuthenticator.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.ExternalLogins.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.ExternalLogins.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.GenerateRecoveryCodes.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.GenerateRecoveryCodes.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.Index.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.Index.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.ManageNavPages.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.PersonalData.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.PersonalData.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.ResetAuthenticator.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.ResetAuthenticator.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.SetPassword.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.SetPassword.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.ShowRecoveryCodes.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.ShowRecoveryCodes.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.TwoFactorAuthentication.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage.TwoFactorAuthentication.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage._Layout.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage._ManageNav.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage._StatusMessage.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Account/Manage/Account.Manage._ViewImports.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Error.cs.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/Error.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/_Layout.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/_ValidationScriptsPartial.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/_ViewImports.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/Pages/_ViewStart.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/ScaffoldingReadme.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/SupportPages._CookieConsentPartial.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/SupportPages._ViewImports.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/SupportPages._ViewStart.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/_LoginPartial.cshtml",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/css/site.css",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/favicon.ico",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/images/banner1.svg",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/images/banner2.svg",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/images/banner3.svg",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/js/site.js",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/bootstrap/LICENSE",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css.map",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css.map",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.svg",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/bootstrap/dist/js/npm.js",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/jquery-validation/LICENSE.md",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/jquery-validation/dist/additional-methods.js",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/jquery/LICENSE.txt",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/jquery/dist/jquery.js",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/jquery/dist/jquery.min.js",
-        "Templates/Identity_Versioned/Bootstrap3/wwwroot/lib/jquery/dist/jquery.min.map",
-        "Templates/MvcLayout/Error.cshtml",
-        "Templates/MvcLayout/_Layout.cshtml",
-        "Templates/RazorPageGenerator/Create.cshtml",
-        "Templates/RazorPageGenerator/CreatePageModel.cshtml",
-        "Templates/RazorPageGenerator/Delete.cshtml",
-        "Templates/RazorPageGenerator/DeletePageModel.cshtml",
-        "Templates/RazorPageGenerator/Details.cshtml",
-        "Templates/RazorPageGenerator/DetailsPageModel.cshtml",
-        "Templates/RazorPageGenerator/Edit.cshtml",
-        "Templates/RazorPageGenerator/EditPageModel.cshtml",
-        "Templates/RazorPageGenerator/Empty.cshtml",
-        "Templates/RazorPageGenerator/EmptyPageModel.cshtml",
-        "Templates/RazorPageGenerator/List.cshtml",
-        "Templates/RazorPageGenerator/ListPageModel.cshtml",
-        "Templates/RazorPageGenerator/_ValidationScriptsPartial.cshtml",
-        "Templates/RazorPageGenerator_Versioned/Bootstrap3/Create.cshtml",
-        "Templates/RazorPageGenerator_Versioned/Bootstrap3/CreatePageModel.cshtml",
-        "Templates/RazorPageGenerator_Versioned/Bootstrap3/Delete.cshtml",
-        "Templates/RazorPageGenerator_Versioned/Bootstrap3/DeletePageModel.cshtml",
-        "Templates/RazorPageGenerator_Versioned/Bootstrap3/Details.cshtml",
-        "Templates/RazorPageGenerator_Versioned/Bootstrap3/DetailsPageModel.cshtml",
-        "Templates/RazorPageGenerator_Versioned/Bootstrap3/Edit.cshtml",
-        "Templates/RazorPageGenerator_Versioned/Bootstrap3/EditPageModel.cshtml",
-        "Templates/RazorPageGenerator_Versioned/Bootstrap3/Empty.cshtml",
-        "Templates/RazorPageGenerator_Versioned/Bootstrap3/EmptyPageModel.cshtml",
-        "Templates/RazorPageGenerator_Versioned/Bootstrap3/List.cshtml",
-        "Templates/RazorPageGenerator_Versioned/Bootstrap3/ListPageModel.cshtml",
-        "Templates/RazorPageGenerator_Versioned/Bootstrap3/_ValidationScriptsPartial.cshtml",
-        "Templates/Startup/ReadMe.cshtml",
-        "Templates/Startup/Startup.cshtml",
-        "Templates/ViewGenerator/Create.cshtml",
-        "Templates/ViewGenerator/Delete.cshtml",
-        "Templates/ViewGenerator/Details.cshtml",
-        "Templates/ViewGenerator/Edit.cshtml",
-        "Templates/ViewGenerator/Empty.cshtml",
-        "Templates/ViewGenerator/List.cshtml",
-        "Templates/ViewGenerator/_ValidationScriptsPartial.cshtml",
-        "Templates/ViewGenerator_Versioned/Bootstrap3/Create.cshtml",
-        "Templates/ViewGenerator_Versioned/Bootstrap3/Delete.cshtml",
-        "Templates/ViewGenerator_Versioned/Bootstrap3/Details.cshtml",
-        "Templates/ViewGenerator_Versioned/Bootstrap3/Edit.cshtml",
-        "Templates/ViewGenerator_Versioned/Bootstrap3/Empty.cshtml",
-        "Templates/ViewGenerator_Versioned/Bootstrap3/List.cshtml",
-        "Templates/ViewGenerator_Versioned/Bootstrap3/_ValidationScriptsPartial.cshtml",
-        "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll",
-        "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.xml",
-        "lib/netstandard2.0/bootstrap3_identitygeneratorfilesconfig.json",
-        "lib/netstandard2.0/bootstrap4_identitygeneratorfilesconfig.json",
-        "microsoft.visualstudio.web.codegenerators.mvc.3.1.5.nupkg.sha512",
-        "microsoft.visualstudio.web.codegenerators.mvc.nuspec"
       ]
     },
     "Microsoft.Win32.Primitives/4.3.0": {
@@ -7275,7 +6678,6 @@
       "path": "system.security.cryptography.algorithms/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -7374,7 +6776,6 @@
       "path": "system.security.cryptography.encoding/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -7501,7 +6902,6 @@
       "path": "system.security.cryptography.x509certificates/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -7823,25 +7223,6 @@
         "ref/xamarinwatchos10/_._",
         "system.text.encoding.extensions.4.3.0.nupkg.sha512",
         "system.text.encoding.extensions.nuspec"
-      ]
-    },
-    "System.Text.Encodings.Web/4.5.0": {
-      "sha512": "Xg4G4Indi4dqP1iuAiMSwpiWS54ZghzR644OtsRCm/m/lBMG8dUBhLVN7hLm8NNrNTR+iGbshCPTwrvxZPlm4g==",
-      "type": "package",
-      "path": "system.text.encodings.web/4.5.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/netstandard1.0/System.Text.Encodings.Web.dll",
-        "lib/netstandard1.0/System.Text.Encodings.Web.xml",
-        "lib/netstandard2.0/System.Text.Encodings.Web.dll",
-        "lib/netstandard2.0/System.Text.Encodings.Web.xml",
-        "system.text.encodings.web.4.5.0.nupkg.sha512",
-        "system.text.encodings.web.nuspec",
-        "useSharedDesignerContext.txt",
-        "version.txt"
       ]
     },
     "System.Text.RegularExpressions/4.3.0": {
@@ -8409,7 +7790,7 @@
       "Microsoft.EntityFrameworkCore >= 3.1.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.0",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.0",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.5",
+      "Microsoft.VisualStudio.Web.CodeGeneration.Utils >= 3.1.0",
       "NLog.Extensions.Logging >= 1.7.2"
     ]
   },
@@ -8478,9 +7859,9 @@
             "target": "Package",
             "version": "[3.1.0, )"
           },
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+          "Microsoft.VisualStudio.Web.CodeGeneration.Utils": {
             "target": "Package",
-            "version": "[3.1.5, )"
+            "version": "[3.1.0, )"
           },
           "NLog.Extensions.Logging": {
             "target": "Package",

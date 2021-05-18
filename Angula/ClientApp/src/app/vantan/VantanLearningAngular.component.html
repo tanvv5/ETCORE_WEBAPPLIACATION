@@ -1,0 +1,44 @@
+<h1>Counter</h1>
+
+<p>This is a simple example of an Angular component.</p>
+
+<h2>Xin chào {{data.title}} đến với website {{data.website}}!</h2>
+<div class="card text-center m-3">
+  <h3 class="card-header">Angular 8 Pagination Example</h3>
+  <div class="card-body">
+      <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="users">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>UserName</th>
+            <th>Email</th>
+            <th>PhoneNumber</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users | slice: (curPage * pageSize) - pageSize :curPage * pageSize">
+            <td>{{ user.Id }}</td>
+            <td>{{ user.UserName }}</td>
+            <td>{{ user.Email }}</td>
+            <td>{{ user.PhoneNumber }}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  <div class="card-footer pb-0 pt-3">
+    <p class="pagination">
+      <button [disabled]="curPage == 1" (click)="curPage = curPage - 1">PREV</button>
+      <span>Page {{curPage}} of {{ numberOfPages() }}</span>
+      <button [disabled]="curPage >= users.length/pageSize" (click)="curPage = curPage + 1">NEXT</button>
+    </p>
+  </div>
+</div>
+<!--<div class="card text-center m-3">
+  <h3 class="card-header">Angular 8 Pagination Example</h3>
+  <div class="card-body">
+    <div *ngFor="let item of pageOfItems">{{item.name}}</div>
+  </div>
+  <div class="card-footer pb-0 pt-3">
+    <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+  </div>
+</div>-->

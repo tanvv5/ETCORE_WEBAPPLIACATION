@@ -65,9 +65,9 @@
               "target": "Package",
               "version": "[3.1.0, )"
             },
-            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+            "Microsoft.VisualStudio.Web.CodeGeneration.Utils": {
               "target": "Package",
-              "version": "[3.1.5, )"
+              "version": "[3.1.0, )"
             },
             "NLog.Extensions.Logging": {
               "target": "Package",
