@@ -13,6 +13,7 @@ import { User } from '../_models';
 export class NavMenuComponent implements OnInit {
   isExpanded = false;
   isLoggedIn: boolean;
+  user: User;
   collapse() {
     this.isExpanded = false;
   }
@@ -27,10 +28,12 @@ export class NavMenuComponent implements OnInit {
   ) {
   }
   ngOnInit() {
-/*    this.isLoggedIn = this.authenticationService.isLoggedIn; console.log("ko fff: " + this.isLoggedIn);*/
     this.authenticationService.isLoggedIn.subscribe(data => {
-      this.isLoggedIn=data;
+      this.isLoggedIn = data;
+      this.user = JSON.parse(localStorage.getItem('currentUser'));
       console.log("isLoggedIn menu: " + data);
+      var obj = JSON.parse(localStorage.getItem('currentUser'));
+      console.log("curent user: " + this.user.UserName);
     });
   }
   logout() {

@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ETCORE_WEBAPPLIACATION", "E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Angula", "Angula\Angula.csproj", "{DC71B98E-8888-46A6-B009-F18D26D384FF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_ONE", "..\APIDOTNETCORE\API_ONE\API_ONE.csproj", "{474EACF6-0C62-4536-B1CA-61524906CBD8}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{DC71B98E-8888-46A6-B009-F18D26D384FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC71B98E-8888-46A6-B009-F18D26D384FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC71B98E-8888-46A6-B009-F18D26D384FF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{474EACF6-0C62-4536-B1CA-61524906CBD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{474EACF6-0C62-4536-B1CA-61524906CBD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{474EACF6-0C62-4536-B1CA-61524906CBD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{474EACF6-0C62-4536-B1CA-61524906CBD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

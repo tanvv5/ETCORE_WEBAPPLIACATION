@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+import { AlertService } from '../services/alert.service.service';
 import { AuthenticationService } from '../services/authentication.service.service';
 import { UserService } from '../services/user.service.service';
 import { User } from '../_models';
@@ -31,7 +32,7 @@ export class VantanLearningAngularcomponent implements OnInit  {
   public curPage: number;
   public pageSize: number;
   isLoggedIn: boolean;
-  constructor(private http: HttpClient, private userService: UserService, private authenticationService: AuthenticationService, private router: Router) {
+  constructor(private http: HttpClient, private userService: UserService, private authenticationService: AuthenticationService, private router: Router, private alertService: AlertService) {
     this.authenticationService.isLoggedIn.subscribe(data => {
       this.isLoggedIn = data;
       if (this.isLoggedIn==false) {
@@ -43,10 +44,13 @@ export class VantanLearningAngularcomponent implements OnInit  {
     this.userService.getAll().subscribe(result => {
       var obj = JSON.parse(JSON.stringify(result));
       this.response = new Response();
-      this.response.Message = obj.Message;
-      this.response.ErrorMessage = obj.ErrorMessage;
-      this.response.DidError = obj.DidError;
-      this.users = JSON.parse(JSON.stringify(obj.Model));
+      if (obj.Message == "Success") {
+        this.users = JSON.parse(JSON.stringify(obj.Model));
+      }
+      else {
+        console.log(JSON.stringify(obj.Result));
+        this.alertService.error(obj.ErrorMessage);
+      }
     }, error => console.log(error));
     // an example array of 150 items to be paged
     this.items = Array(150).fill(0).map((x, i) => ({ id: (i + 1), name: `Item ${i + 1}` }));
@@ -60,19 +64,6 @@ export class VantanLearningAngularcomponent implements OnInit  {
     // update current page of items
     this.pageOfItems = pageOfItems;
     console.log(pageOfItems);
-  }
-  public getProduct() {    
-    let header = new HttpHeaders().set(
-      "Authorization",
-      "Bearer " + localStorage.getItem('token'))
-    return this.http.get<User[]>("http://localhost:5000/api/UserInfo", { headers: header }).subscribe(result => {
-      this.users = result;
-      console.log("item 1:"+this.users[0].UserName); 
-      //for (var i = 0; i < obj.length; i++) {
-      //  let objuser_add: Users = JSON.parse(JSON.stringify(obj[i]));
-      //  this.users.push(objuser_add);
-      //}
-    }, error => console.log(error));
   }
 }
 

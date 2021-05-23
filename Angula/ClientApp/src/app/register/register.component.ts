@@ -1,25 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AlertService } from '../services/alert.service.service';
+import { UserService } from '../services/user.service.service';
 import { AuthenticationService } from '../services/authentication.service.service';
+//import { User } from 'oidc-client';
+import { Response } from '../_models/Response';
+import { UserRegister } from '../_models/user_register';
 
-@Component({ templateUrl: 'login.component.html' })
-export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+
+@Component({ templateUrl: 'register.component.html' })
+export class RegisterComponent implements OnInit {
+  registerForm: FormGroup;
   loading = false;
   submitted = false;
-  returnUrl: string;
-
+  public response: Response;
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
+    private userService: UserService,
     private alertService: AlertService
   ) {
-    //redirect to home if already logged in
     this.authenticationService.isLoggedIn.subscribe(data => {
       if (data) {
         this.router.navigate(['/']);
@@ -28,17 +31,16 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
+    this.registerForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
-
-    //// get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.loginForm.controls; }
+  get f() { return this.registerForm.controls; }
 
   onSubmit() {
     this.submitted = true;
@@ -47,18 +49,23 @@ export class LoginComponent implements OnInit {
     this.alertService.clear();
 
     // stop here if form is invalid
-    if (this.loginForm.invalid) {
+    if (this.registerForm.invalid) {
       return;
     }
 
     this.loading = true;
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
+    var user_info: UserRegister = new UserRegister();
+    user_info.UserName = this.registerForm.get('username').value;
+    user_info.Password = this.registerForm.get("password").value;
+
+    this.userService.register(user_info)
       .pipe(first())
       .subscribe(
         data => {
+          console.log(JSON.stringify(data));
           if (data.Message == "Success") {
-            console.log(JSON.stringify(data.Result));
-            this.router.navigate([this.returnUrl]);
+            this.alertService.success('Registration successful', true);
+            this.router.navigate(['/login']);
           }
           else {
             console.log(JSON.stringify(data.Result));
@@ -67,7 +74,6 @@ export class LoginComponent implements OnInit {
           }
         },
         error => {
-          console.log(JSON.stringify(error));
           this.alertService.error(error);
           this.loading = false;
         });

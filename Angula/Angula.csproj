@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\app\admin\" />
     <Folder Include="ClientApp\src\app\services\" />
   </ItemGroup>
 

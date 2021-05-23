@@ -14,6 +14,14 @@ import { JwPaginationComponent } from 'jw-angular-pagination';
 import { LoginComponent } from './login/login.component';
 import { AlertComponent } from './_share/alert.component';
 import { RegisterComponent } from './register/register.component';
+import { PageNotFoundComponentComponent } from './page-not-found-component/page-not-found-component.component';
+import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
+import { AdminAuthGuard } from './services/admin-auth-guard.service';
+import { AuthenticationService } from './services/authentication.service.service';
+import { ProductCardComponent } from './product-card/product-card.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 
 
@@ -26,7 +34,8 @@ import { RegisterComponent } from './register/register.component';
     FetchDataComponent,
     VantanLearningAngularcomponent
     , JwPaginationComponent, LoginComponent
-    , AlertComponent, RegisterComponent
+    , AlertComponent, RegisterComponent, PageNotFoundComponentComponent, ProductCardComponent, ShoppingCartComponent
+    , AdminOrdersComponent, ProductFormComponent, AdminProductsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -38,7 +47,12 @@ import { RegisterComponent } from './register/register.component';
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'vantan', component: VantanLearningAngularcomponent },
       { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent }
+      { path: 'register', component: RegisterComponent },
+      { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthenticationService, AdminAuthGuard]},
+      { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthenticationService,AdminAuthGuard]},
+
+      { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthenticationService,AdminAuthGuard]},
+      { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthenticationService,AdminAuthGuard]}
     ])
   ],
   providers: [],

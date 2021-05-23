@@ -16,4 +16,6 @@ export class User {
   LockoutEnd: string;
   LockoutEnabled: boolean;
   AccessFailedCount: number;
+  Pass: string;
+  Roles: string;
 }
