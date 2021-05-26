@@ -15,9 +15,20 @@ export class ProductFormComponent implements OnInit {
   categories$: any[];
   product = {};
   id;
-
+  public response: Response;
   constructor(private route: ActivatedRoute, private router: Router, private categoryService: CategoryService, private productService: ProductService) {
-    this.categories$ = categoryService.getCategories();
+    categoryService.getCategories().then(result => {
+      var obj = JSON.parse(JSON.stringify(result));
+      this.response = new Response();
+      if (obj.Message == "Success") {
+        this.categories$ = JSON.parse(JSON.stringify(obj.Model));
+      }
+      //else {
+      //  this.alertService.error(obj.ErrorMessage);
+      //}
+      console.log(this.categories$);
+    }, error => console.log(error));;
+
     this.id = this.route.snapshot.paramMap.get('id');
     console.log(this.id);
     if (this.id) {

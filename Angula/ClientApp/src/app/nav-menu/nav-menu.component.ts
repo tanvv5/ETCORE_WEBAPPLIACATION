@@ -33,7 +33,7 @@ export class NavMenuComponent implements OnInit {
       this.user = JSON.parse(localStorage.getItem('currentUser'));
       console.log("isLoggedIn menu: " + data);
       var obj = JSON.parse(localStorage.getItem('currentUser'));
-      console.log("curent user: " + this.user.UserName);
+      //console.log("curent user: " + this.user.UserName);
     });
   }
   logout() {

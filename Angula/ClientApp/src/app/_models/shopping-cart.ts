@@ -1,17 +1,9 @@
-import { ShoppingCartItem } from './shopping-cart-item';
+import { Product } from './product';
 
 export class ShoppingCart{
-    items: { [productId: string]: ShoppingCartItem};
-   
-
-    constructor(public itemsMap: { [productId: string]: ShoppingCartItem}){
-
-        this.items = itemsMap || {};
-        
-       
-
-    }
-
-
-    
+  product: Product;
+  quantity: number;
+    //constructor(public itemsMap: { [productId: string]: ShoppingCartItem}){
+    //    this.items = itemsMap || {};
+    //}  
 }

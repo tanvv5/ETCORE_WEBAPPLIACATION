@@ -22,9 +22,11 @@ import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import { AuthenticationService } from './services/authentication.service.service';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-
-
-
+import { JwtModule } from "@auth0/angular-jwt";
+import { EmptyCartComponent } from './shopping-cart/empty-cart/empty-cart.component';
+export function tokenGetter() {
+  return localStorage.getItem("token");
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,11 +37,18 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     VantanLearningAngularcomponent
     , JwPaginationComponent, LoginComponent
     , AlertComponent, RegisterComponent, PageNotFoundComponentComponent, ProductCardComponent, ShoppingCartComponent
-    , AdminOrdersComponent, ProductFormComponent, AdminProductsComponent
+    , AdminOrdersComponent, ProductFormComponent, AdminProductsComponent, EmptyCartComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["example.com"],
+        disallowedRoutes: ["http://example.com/examplebadroute/"],
+      },
+    }),
     FormsModule, ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -48,11 +57,12 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
       { path: 'vantan', component: VantanLearningAngularcomponent },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
-      { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthenticationService, AdminAuthGuard]},
-      { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthenticationService,AdminAuthGuard]},
+      { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthenticationService, AdminAuthGuard] },
+      { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthenticationService, AdminAuthGuard] },
 
-      { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthenticationService,AdminAuthGuard]},
-      { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthenticationService,AdminAuthGuard]}
+      { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthenticationService, AdminAuthGuard] },
+      { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthenticationService, AdminAuthGuard] },
+      { path: 'card', component: ShoppingCartComponent }
     ])
   ],
   providers: [],

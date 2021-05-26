@@ -8,13 +8,14 @@ import { environment } from '../../environments/environment';
 import { AlertService } from './alert.service.service';
 import { first, map } from 'rxjs/operators';
 import { CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { RestAPI } from './RestAPI.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService implements CanActivate  {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
   private loggedIn = new BehaviorSubject<boolean>(false);
-  constructor(private http: HttpClient, private alertService: AlertService, private router: Router) {
+  constructor(private http: HttpClient, private alertService: AlertService, private router: Router, private restAPI: RestAPI) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
     ///biến này lưu toàn cục nên nếu load lại trang thì loggedIn sẽ biến mất nhé nên phải setlại loggedIN
@@ -39,15 +40,15 @@ export class AuthenticationService implements CanActivate  {
   }
 
   public login(username, password) {
-    const body = { Password: password, UserName: username };
+    const body = { Id: 0, Password: password, UserName: username };
     const header = { 'content-type': 'application/json', 'Accept': 'application/json', 'responseType': 'text','KeyAPI':'testAPIKeyFromAngular8' };
-    return this.http.post<any>(`${environment.ApiUrl}api/Token`, body, { headers: header })
+    return this.http.post<any>(`${environment.ApiUrl}api/Token/Login`, body, { headers: header })
       .pipe(map(data =>
       {
         var obj = JSON.parse(JSON.stringify(data));
         if (data.Message == "Success") {
-          localStorage.setItem('token', obj.Result);
-          console.log("token get api: " + obj.Result);
+          //localStorage.setItem('token', obj.Result);
+          //console.log("token get api: " + obj.Result);
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           var user = new User();
           user.Email = username;
@@ -67,7 +68,7 @@ export class AuthenticationService implements CanActivate  {
   logout() {
     // remove user from local storage and set current user to null
     localStorage.removeItem('currentUser');
-    localStorage.removeItem('token');
+    //localStorage.removeItem('token');
     this.loggedIn.next(false);
     this.currentUserSubject.next(null);
   }

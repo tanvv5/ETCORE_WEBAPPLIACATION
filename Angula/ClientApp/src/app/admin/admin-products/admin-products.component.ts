@@ -12,18 +12,15 @@ import { Product } from '../../_models/product';
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.css']
 })
-export class AdminProductsComponent implements OnInit, OnDestroy {
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+export class AdminProductsComponent implements OnInit {
   products: Product[];
   subscription: Subscription;
   items: Product[] = [];
   itemCount: number;
   public response: Response;
   constructor(private productService: ProductService, private alertService: AlertService) {
-    this.subscription = this.productService.getAll()
-    .subscribe(result => {
+    this.productService.getAll()
+    .then(result => {
         var obj = JSON.parse(JSON.stringify(result));
         this.response = new Response();
         if (obj.Message == "Success") {

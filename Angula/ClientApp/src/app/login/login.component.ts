@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 import { AlertService } from '../services/alert.service.service';
 import { AuthenticationService } from '../services/authentication.service.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
@@ -11,7 +12,6 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
     //redirect to home if already logged in
     this.authenticationService.isLoggedIn.subscribe(data => {
       if (data) {
+        console.log("neeu login thi ve trang chur: " + data);
         this.router.navigate(['/']);
       }
     });
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
     });
 
     //// get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';    
   }
 
   // convenience getter for easy access to form fields

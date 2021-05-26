@@ -19,20 +19,18 @@ export class ProductCardComponent implements OnInit {
   }
   addItemToCart() {
     console.log("executed");
-    //let cart = this.cartService.addToCart(this.product);
+    let cart = this.cartService.addToCart(this.product);
   }
 
   removeItemFromCart() {
-    // let cart = this.cartService.removeFromCart(this.product);
+     let cart = this.cartService.removeFromCart(this.product);
     console.log('removeFromCart');
   }
 
   getQuantity() {
     if (!this.shoppingCart) return 0;
-    console.log(this.shoppingCart.items);
-    let item = this.shoppingCart.items[this.product.ProId];
-    console.log(item);
-    return item ? item.quantity : 0;
+    console.log(this.shoppingCart.quantity);
+    return this.shoppingCart ? this.shoppingCart.quantity: 0;
   }
 
 }
