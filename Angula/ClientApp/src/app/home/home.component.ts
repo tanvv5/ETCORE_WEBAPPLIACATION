@@ -27,14 +27,14 @@ export class HomeComponent implements OnInit {
       .getAll()
       .then(result => {
         var obj = JSON.parse(JSON.stringify(result));
-        console.log("sao ko ra: "+JSON.stringify(result));
         this.response = new Response();
         if (obj.Message == "Success") {
           this.filteredProducts = JSON.parse(JSON.stringify(obj.Model));
         }
         else {
           this.alertService.error(obj.ErrorMessage);
-        }       
+        }
+        console.log(this.filteredProducts);
       }, error => console.log(error));
     
     this.categoryService

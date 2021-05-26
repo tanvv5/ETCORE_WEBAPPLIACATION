@@ -1,8 +1,10 @@
 export interface Product {
   ProId: string;
   ProName: string;
-  ProCategory: string;
+  ProCategory: number;
   Unit: number;
   StockQuatity: string;
-  image: string;
+  Price: number;
+  Status: string;
+  Description: string;
 }

@@ -1,4 +1,4 @@
-<header>
+<!--<header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container px-4 px-lg-5">
       <a class="navbar-brand" [routerLink]="['/']">Angular Shop</a>
@@ -29,14 +29,126 @@
             </div>
           </li>
         </ul>
-        <form class="d-flex">
-          <button class="btn btn-outline-dark" type="submit">
-            <i class="bi-cart-fill me-1"></i>
-            <a class="btn" id="mycard" [routerLink]="['/card']">Cart</a> 
-            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-          </button>
-        </form>
+        <app-cart-left></app-cart-left>
       </div>
     </div>
   </nav>
-</header>
+</header>-->
+<header id="header">
+  <!--header-->
+  <div class="header_top">
+    <!--header_top-->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="contactinfo">
+            <ul class="nav nav-pills">
+              <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
+              <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="btn-group pull-right clearfix">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
+                USA
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a href="">VietNam</a></li>
+                <li><a href="">UK</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="social-icons pull-right">
+            <ul class="nav navbar-nav">
+              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+              <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!--/header_top-->
+
+  <div class="header-middle">
+    <!--header-middle-->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 clearfix">
+          <div class="logo pull-left">
+            <a [routerLink]="['/']"><img src="assets/images/home/logo.png" alt="" /></a>
+          </div>
+        </div>
+        <div class="col-md-8 clearfix">
+          <div class="shop-menu clearfix pull-right">
+            <ul class="nav navbar-nav">
+              <li><a  [routerLink]="['card']"><i class="fa fa-user"></i> Account</a></li>
+              <li><a [routerLink]="['card']"><i class="fa fa-star"></i> Wishlist</a></li>
+              <li><a  [routerLink]="['checkout']"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+              <li><a [routerLink]="['card']"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+              <li ngbDropdown *ngIf="isLoggedIn" class="dropdown">
+                <a ngbDropdownToggle class="dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.UserName}}</a>
+                <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
+                  <a class="dropdown-item" [routerLink]="['/my/orders']">My Orders</a>
+                  <a class="dropdown-item" [routerLink]="['/my/orders']">Manage Orders</a>
+                  <a class="dropdown-item" [routerLink]="['/my/products']">Manage Products</a>
+                  <a class="dropdown-item" (click)="logout()">Logout</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!--/header-middle-->
+
+  <div class="header-bottom">
+    <!--header-bottom-->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div class="mainmenu pull-left">
+            <ul class="nav navbar-nav collapse navbar-collapse">
+              <li><a href="index.html" class="active">Home</a></li>
+              <li class="dropdown">
+                <a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                <ul role="menu" class="sub-menu">
+                  <li><a href="shop.html">Products</a></li>
+                  <li><a [routerLink]="['checkout']">Checkout</a></li>
+                  <li><a [routerLink]="['card']">Cart</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                <ul role="menu" class="sub-menu">
+                  <li><a href="blog.html">Blog List</a></li>
+                  <li><a href="blog-single.html">Blog Single</a></li>
+                </ul>
+              </li>
+              <li><a href="404.html">404</a></li>
+              <li><a href="contact-us.html">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="search_box pull-right">
+            <input type="text" placeholder="Search" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!--/header-bottom-->
+</header><!--/header-->

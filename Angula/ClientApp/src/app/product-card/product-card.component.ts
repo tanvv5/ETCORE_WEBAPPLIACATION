@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../_models/product';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 import { ShoppingCart } from '../_models/shopping-cart';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'product-card',

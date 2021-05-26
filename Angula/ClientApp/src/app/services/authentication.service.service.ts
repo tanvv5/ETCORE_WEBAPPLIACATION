@@ -68,7 +68,7 @@ export class AuthenticationService implements CanActivate  {
   logout() {
     // remove user from local storage and set current user to null
     localStorage.removeItem('currentUser');
-    //localStorage.removeItem('token');
+    localStorage.clear();
     this.loggedIn.next(false);
     this.currentUserSubject.next(null);
   }

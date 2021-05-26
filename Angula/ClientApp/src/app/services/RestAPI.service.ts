@@ -19,7 +19,7 @@ export class RestAPI {
     var datecreate = this.jwtHelper.getTokenExpirationDate(localStorage.getItem('token'));
     var d = new Date();
     d.setHours(d.getHours() - 1);
-    if (datecreate < d) {
+    if (datecreate < d || localStorage.getItem('token') == null) {
       console.log(this.BASE_URL +"api/Token"); 
       this.http.post<any>(`${this.BASE_URL}api/Token`, body, { headers: header })
         .pipe(first()).subscribe(data => {
@@ -48,8 +48,8 @@ export class RestAPI {
       headers: new HttpHeaders().set(
         "Authorization",
         "Bearer ".concat(localStorage.getItem('token'))),
-      params: param,
-      body
+      body,
+      params: param
     };
     return this.http.get<any>(this.baseURL(ControllerName, actionName), httpOptions);
   }
@@ -58,7 +58,8 @@ export class RestAPI {
       headers: new HttpHeaders().set(
         "Authorization",
         "Bearer ".concat(localStorage.getItem('token'))),
-      body
+      body,
+      params: param
     };
     return this.http.post<any>(this.baseURL(ControllerName, actionName), httpOptions);
   }
