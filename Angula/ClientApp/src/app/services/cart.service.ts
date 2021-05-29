@@ -7,8 +7,8 @@ import { cartInfo } from '../_models/CartInfo';
 export class CartService {
   cartinfo: cartInfo;
   constructor() {
-    if (localStorage.getItem('cartUser') != null) {
-      this.cartinfo = JSON.parse(localStorage.getItem('cartUser'));
+    if (localStorage.getItem('cartitem') != null) {
+      this.cartinfo = JSON.parse(localStorage.getItem('cartitem'));
     }
     else {
       this.cartinfo = {
@@ -20,6 +20,6 @@ export class CartService {
   public update(total: number, item: number) {
     this.cartinfo.total = total;
     this.cartinfo.items = item;
-    localStorage.setItem('cartUser', JSON.stringify(this.cartinfo));
+    localStorage.setItem('cartitem', JSON.stringify(this.cartinfo));
   }
 }

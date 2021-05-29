@@ -15,20 +15,21 @@ export class ProductService {
     
   }
   getAll() {
-    //let header = new HttpHeaders().set(
-    //  "Authorization",
-    //  "Bearer ".concat(localStorage.getItem('token')))
-    //return this.http.get<any>(`${environment.ApiUrl}api/Products`, { headers: header });
     return this.restAPI.get("api", "Products", null, null).toPromise().then(res=>res);
   }
   get(productId) {
-    const httpOptions = {
-      headers: new HttpHeaders().set(
-        "Authorization",
-        "Bearer ".concat(localStorage.getItem('token'))),
-      params: new HttpParams().set("id", productId)
-    };
-    return this.http.get<any>(`${environment.ApiUrl}​api/Products`, httpOptions);
+    //const httpOptions = {
+    //  headers: new HttpHeaders().set(
+    //    "Authorization",
+    //    "Bearer ".concat(localStorage.getItem('token'))),
+    //  params: new HttpParams().set("id", productId)
+    //};
+    //return this.http.get<any>(`${environment.ApiUrl}api/Products/detail`, httpOptions).toPromise().then(res => res);
+    return this.restAPI.get("api", "Products/detail/" + productId, null, null).toPromise().then(res => res);
+  }
+  getproduct_in_category(category_id: any) {
+    return this.restAPI.get("api", "Products/findproductincategory/" + category_id, null, null).toPromise().then(res => res);
+
   }
   update(productId, product) {
     const httpOptions = {
@@ -37,7 +38,7 @@ export class ProductService {
         "Bearer ".concat(localStorage.getItem('token'))),      
       params: new HttpParams().set("id", productId)
     };
-    return this.http.put<any>(`${environment.ApiUrl}api/UserInfo`, product, httpOptions);
+    return this.http.put<any>(`${environment.ApiUrl}api/UserInfo`, product, httpOptions).toPromise().then(res => res);
   }
   delete(productId) {
     const httpOptions = {
@@ -46,7 +47,7 @@ export class ProductService {
         "Bearer ".concat(localStorage.getItem('token'))),
       params: new HttpParams().set("id", productId)
     };
-    return this.http.delete<any>(`${environment.ApiUrl}api/UserInfo`, httpOptions);
+    return this.http.delete<any>(`${environment.ApiUrl}api/UserInfo`, httpOptions).toPromise().then(res => res);
   }
 
 }

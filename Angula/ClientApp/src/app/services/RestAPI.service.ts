@@ -16,10 +16,9 @@ export class RestAPI {
   Gettoken() {
     const body = { Id: 0,Password: this.PassWord, UserName: this.UserName };
     const header = { 'content-type': 'application/json', 'Accept': 'application/json', 'responseType': 'text', 'KeyAPI': '' };        
-    var datecreate = this.jwtHelper.getTokenExpirationDate(localStorage.getItem('token'));
+    var dateexpire = this.jwtHelper.getTokenExpirationDate(localStorage.getItem('token'));
     var d = new Date();
-    d.setHours(d.getHours() - 1);
-    if (datecreate < d || localStorage.getItem('token') == null) {
+    if (d > dateexpire || localStorage.getItem('token') == null) {
       console.log(this.BASE_URL +"api/Token"); 
       this.http.post<any>(`${this.BASE_URL}api/Token`, body, { headers: header })
         .pipe(first()).subscribe(data => {
@@ -37,6 +36,8 @@ export class RestAPI {
     }
     else {
       console.log("Token còn hiệu lực: " + localStorage.getItem('token'));
+      console.log("Time create: " + dateexpire.toString());
+      console.log("Token check: " + d.toString());
     }
   }
   baseURL(ControllerName: string, actionName: string):string {

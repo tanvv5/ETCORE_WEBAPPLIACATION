@@ -1,4 +1,4 @@
-﻿/*************************
+/*************************
 *******Typography******
 **************************/
 
@@ -206,6 +206,7 @@ a#scrollUp i {
     padding: 0;
     padding-right: 0;
     margin-top: 10px;
+    display: block;
 }
 
 .shop-menu ul li a i {
@@ -2438,4 +2439,7 @@ textarea {
 
 .contact-info .social-networks ul li a:hover {
     color: #FE980F;
+}
+.bg-green {
+  background: #FE980F;
 }

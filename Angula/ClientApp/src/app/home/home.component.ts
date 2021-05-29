@@ -20,8 +20,7 @@ export class HomeComponent implements OnInit {
   category: Category[] =[];
   filteredProducts: Product[] = [];
   public response: Response;
-  subscription: Subscription;
-  constructor( private route: ActivatedRoute, private productService: ProductService, private alertService: AlertService, private categoryService: CategoryService)
+  constructor( private route: ActivatedRoute, private productService: ProductService, private alertService: AlertService)
   {
      this.productService
       .getAll()
@@ -35,21 +34,7 @@ export class HomeComponent implements OnInit {
           this.alertService.error(obj.ErrorMessage);
         }
         console.log(this.filteredProducts);
-      }, error => console.log(error));
-    
-    this.categoryService
-      .getCategories()
-      .then(result => {
-        var obj = JSON.parse(JSON.stringify(result));
-        this.response = new Response();
-        if (obj.Message == "Success") {
-          this.category = JSON.parse(JSON.stringify(obj.Model));
-        }
-        else {
-          this.alertService.error(obj.ErrorMessage);
-        }
-        console.log(this.category);
-      }, error => console.log(error));
+      }, error => console.log(error));   
   }
   async ngOnInit() {
   }

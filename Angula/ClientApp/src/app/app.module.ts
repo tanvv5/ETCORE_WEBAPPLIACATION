@@ -28,6 +28,11 @@ import { CartLeftComponent } from './shopping-cart/cart-left/cart-left.component
 import { FooterComponent } from './footer/footer.component';
 import { ShopsComponent } from './shops/shops.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
+import { CategoryComponent } from './category/category.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { SearchComponent } from './search/search.component';
+import { SearchformComponent } from './search/searchform/searchform.component';
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
@@ -41,7 +46,8 @@ export function tokenGetter() {
     VantanLearningAngularcomponent
     , JwPaginationComponent, LoginComponent
     , AlertComponent, RegisterComponent, PageNotFoundComponentComponent, ProductCardComponent, ShoppingCartComponent
-    , AdminOrdersComponent, ProductFormComponent, AdminProductsComponent, EmptyCartComponent, CartLeftComponent, FooterComponent, ShopsComponent, ProductDetailComponent
+    , AdminOrdersComponent, ProductFormComponent, AdminProductsComponent, EmptyCartComponent, CartLeftComponent, FooterComponent, ShopsComponent,
+    ProductDetailComponent, LeftSidebarComponent, CategoryComponent, CheckoutComponent, SearchComponent, SearchformComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -67,7 +73,10 @@ export function tokenGetter() {
       { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthenticationService, AdminAuthGuard] },
       { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthenticationService, AdminAuthGuard] },
       { path: 'card', component: ShoppingCartComponent },
-      { path: 'checkout', component: ShoppingCartComponent }
+      { path: 'checkout', component: CheckoutComponent },
+      { path: 'product-detail', component: ProductDetailComponent },
+      { path: 'category', component: CategoryComponent },
+      { path: 'search', component: SearchComponent }
     ])
   ],
   providers: [],

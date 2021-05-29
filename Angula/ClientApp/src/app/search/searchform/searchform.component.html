@@ -1,0 +1,18 @@
+<form method="post">
+  <ul class="nav navbar-nav collapse navbar-collapse">
+    <li>
+      <input class="d-inline bg-success" type="text" placeholder="Search" id="SeachAllid" name="keyword" [(ngModel)]="keyword" [ngModelOptions]="{standalone: true}" />
+    </li>
+    <li>
+      <select [(ngModel)]="categoryId" [ngModelOptions]="{standalone: true}">
+        <option value="-1" selected="selected">All</option>
+        <optgroup label="{{category.Name}}" *ngFor="let category of categories">
+          <option value="{{catelement.Id}}" *ngFor="let catelement of category.subCategories">{{catelement.Name}}</option>
+        </optgroup>
+      </select>
+    </li>
+    <li>
+      <button class="btn btn-primary" style="margin: 0 auto !important;" (click)="Search()">Go</button>
+    </li>
+  </ul>
+</form>

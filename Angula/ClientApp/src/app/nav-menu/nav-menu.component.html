@@ -43,7 +43,7 @@
         <div class="col-sm-6">
           <div class="contactinfo">
             <ul class="nav nav-pills">
-              <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
+              <li><a href="#"><i class="fa fa-phone"></i> +0000000000</a></li>
               <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
             </ul>
           </div>
@@ -87,10 +87,12 @@
         <div class="col-md-8 clearfix">
           <div class="shop-menu clearfix pull-right">
             <ul class="nav navbar-nav">
-              <li><a  [routerLink]="['card']"><i class="fa fa-user"></i> Account</a></li>
-              <li><a [routerLink]="['card']"><i class="fa fa-star"></i> Wishlist</a></li>
-              <li><a  [routerLink]="['checkout']"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-              <li><a [routerLink]="['card']"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+              <li><a [routerLink]="['/card']"><i class="fa fa-user"></i> Account</a></li>
+              <li><a [routerLink]="['/card']"><i class="fa fa-star"></i> Wishlist</a></li>
+              <li><a [routerLink]="['/checkout']"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+              <li>
+                <app-cart-left></app-cart-left>
+              </li>
               <li ngbDropdown *ngIf="isLoggedIn" class="dropdown">
                 <a ngbDropdownToggle class="dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.UserName}}</a>
                 <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
@@ -111,7 +113,7 @@
     <!--header-bottom-->
     <div class="container">
       <div class="row">
-        <div class="col-sm-9">
+        <div class="col-sm-6">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
@@ -127,8 +129,8 @@
                 <a href="#">Shop<i class="fa fa-angle-down"></i></a>
                 <ul role="menu" class="sub-menu">
                   <li><a href="shop.html">Products</a></li>
-                  <li><a [routerLink]="['checkout']">Checkout</a></li>
-                  <li><a [routerLink]="['card']">Cart</a></li>
+                  <li><a [routerLink]="['/checkout']">Checkout</a></li>
+                  <li><a [routerLink]="['/card']">Cart</a></li>
                 </ul>
               </li>
               <li class="dropdown">
@@ -143,10 +145,8 @@
             </ul>
           </div>
         </div>
-        <div class="col-sm-3">
-          <div class="search_box pull-right">
-            <input type="text" placeholder="Search" />
-          </div>
+        <div class="col-sm-6">
+          <app-searchform></app-searchform>
         </div>
       </div>
     </div>

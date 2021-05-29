@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CartService } from '../services/cart.service';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 import { ShoppingCart } from '../_models/shopping-cart';
 
@@ -11,35 +12,43 @@ import { ShoppingCart } from '../_models/shopping-cart';
 export class ShoppingCartComponent implements OnInit {
   private items: ShoppingCart[] = [];
   private total: number;
-  constructor(private route: ActivatedRoute, private router: Router, private cartService: ShoppingCartService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private cartservice: CartService) { }
 
   ngOnInit() {
     this.loadcart();
   }
   loadcart() {
+    let total: number = 0;
+    let items: number = 0;
     let card: any = JSON.parse(localStorage.getItem('card'));
-    console.log(card);
+    this.items = [];
     for (var i = 0; i < card.length; i++) {
       let it = JSON.parse(card[i]);
-      console.log(it.product.ProName);
+      console.log(it.product.ProName);      
       this.items.push({
         product: it.product,
         quantity: it.quantity
       });
       this.total += 1;
+      items += 1;
+      total += (it.product.Price * it.quantity);
     }
+    this.cartservice.update(total, items);
   }
   addQuantity(id: number) {
     let card: any = JSON.parse(localStorage.getItem('card'));
     for (var i = 0; i < card.length; i++) {
       let it = JSON.parse(card[i]);
       if (it.product.ProId == id) {
-        it.quantity++;
-        card[i] = JSON.stringify(it);
-        localStorage.setItem('card', JSON.stringify(card));
-        break;
+        if (it.quantity < 10) {
+          it.quantity++;
+          card[i] = JSON.stringify(it);
+          localStorage.setItem('card', JSON.stringify(card));
+          break;
+        }
       }
     }
+    this.loadcart();
   }
 
   removeQuantity(id: number) {
@@ -47,11 +56,26 @@ export class ShoppingCartComponent implements OnInit {
     for (var i = 0; i < card.length; i++) {
       let it = JSON.parse(card[i]);
       if (it.product.ProId == id) {
-        it.quantity--;
-        card[i] = JSON.stringify(it);
+        if (it.quantity > 1) {
+          it.quantity--;
+          card[i] = JSON.stringify(it);
+          localStorage.setItem('card', JSON.stringify(card));
+          break;
+        }
+      }
+    }
+    this.loadcart();
+  }
+  removeProduct(id: number) {
+    let card: any = JSON.parse(localStorage.getItem('card'));
+    for (var i = 0; i < card.length; i++) {
+      let it = JSON.parse(card[i]);
+      if (it.product.ProId == id) {
+        card.pop(card[i]);
         localStorage.setItem('card', JSON.stringify(card));
         break;
       }
     }
+    this.loadcart();
   }
 }

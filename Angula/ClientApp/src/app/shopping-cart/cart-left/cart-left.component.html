@@ -1,8 +1,4 @@
-<form class="d-flex">
-  <button class="btn btn-outline-dark" type="submit">
-    <i class="bi-cart-fill me-1"></i>
-    <a class="btn" id="mycard" [routerLink]="['/card']">Cart</a>
-    <span class="badge bg-dark text-white ms-1 rounded-pill">{{cartinfo.items}}</span>
-    <span class="badge bg-dark text-white ms-1 rounded-pill">{{cartinfo.total}} VND</span>
-  </button>
-</form>
+<a [routerLink]="['/card']">
+  <i class="fa fa-shopping-cart"></i> Cart <span class="badge bg-green text-white ms-1 rounded-pill">{{cartinfo.items}}</span>
+</a>
+    <!--<span class="badge bg-dark text-white ms-1 rounded-pill">{{cartinfo.total}} VND</span>-->

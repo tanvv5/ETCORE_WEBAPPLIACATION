@@ -2,23 +2,27 @@
   <div class="product-image-wrapper">
     <div class="single-products">
       <div class="productinfo text-center">
-        <img src="assets/images/home/product1.jpg" alt="" />
-        <h2>${{product.Price}}</h2>
+        <a [routerLink]="['product-detail']" [queryParams]="{ProId:product.ProId}"><img src="assets/images/home/product1.jpg" alt="" /></a>
+        <h2>{{product.Price |currency:'VND':'symbol':'4.0-0'}}</h2>
         <p>{{product.ProName}}</p>
-        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+        <a [routerLink]="['product-detail']" [queryParams]="{ProId:product.ProId}" class="btn btn-default add-to-cart">
+          Detail
+        </a>
       </div>
-      <div class="product-overlay">
+      <!--<div class="product-overlay">
         <div class="overlay-content">
           <h2>${{product.Price}}</h2>
           <p>{{product.ProName}}</p>
-          <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+          <a [routerLink]="['product-detail']" [queryParams]="{ProId:product.ProId}" class="btn btn-default add-to-cart">
+            Detail
+          </a>
         </div>
-      </div>
+      </div>-->
     </div>
     <div class="choose">
       <ul class="nav nav-pills nav-justified">
         <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-        <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+        <li><a (onclick)="addItemToCart()"><i class="fa fa-plus-square"></i>Add to Cart</a></li>
       </ul>
     </div>
   </div>
