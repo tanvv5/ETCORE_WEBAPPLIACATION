@@ -53,6 +53,7 @@ export class AuthenticationService implements CanActivate  {
           var user = new User();
           user.Email = username;
           user.UserName = username;
+          user.Roles = obj.Result;
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.loggedIn.next(true);
           this.currentUserSubject.next(user);

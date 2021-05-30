@@ -19,14 +19,14 @@ namespace ETCORE_WEBAPPLIACATION.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<AccountController> _logger;
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
         [Obsolete]
         private readonly IHostingEnvironment _hostingEnvironment1;
 
         [Obsolete]
-        public AccountController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IHostingEnvironment hostingEnvironment)
+        public AccountController(ILogger<AccountController> logger, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IHostingEnvironment hostingEnvironment)
         {
             _logger = logger;
             _userManager = userManager;

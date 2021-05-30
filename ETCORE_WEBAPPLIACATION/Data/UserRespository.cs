@@ -39,10 +39,10 @@ namespace ETCORE_WEBAPPLIACATION.Data
                                 {
                                     ProId = (int)reader["ProId"],
                                     ProName = reader["ProName"].ToString(),
-                                    ProCategory = reader["ProCategory"].ToString(),
+                                    //ProCategory = reader["ProCategory"].ToString(),
                                     Unit = reader["Unit"].ToString(),
                                     StockQuatity = (int)reader["StockQuatity"],
-                                    image = reader["image"].ToString()
+                                    //image = reader["image"].ToString()
                                 }
                                 ); ;
                         }

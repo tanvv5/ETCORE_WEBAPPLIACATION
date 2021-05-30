@@ -8,7 +8,7 @@
         <div class="features_items card-body">
           <!--features_items-->
           <h2 class="title text-center">Features Items</h2>
-          <ng-container *ngFor="let product of products">
+          <ng-container *ngFor="let product of products | paginate: config">
             <div class="col-sm-4">
               <div class="product-image-wrapper">
                 <div class="single-products">
@@ -37,6 +37,18 @@
           </ng-container>
         </div><!--features_items-->
         <div class="card-footer pb-0 pt-3">
+          <pagination-controls [id]="config.id"
+                               [maxSize]="maxSize"
+                               [directionLinks]="directionLinks"
+                               [autoHide]="autoHide"
+                               [responsive]="responsive"
+                               [previousLabel]="labels.previousLabel"
+                               [nextLabel]="labels.nextLabel"
+                               [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                               [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                               [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+                               (pageChange)="onPageChange($event)"
+                               (pageBoundsCorrection)="onPageBoundsCorrection($event)"></pagination-controls>
           <ul class="pagination">
             <li class="active"><a href="">1</a></li>
             <li><a href="">2</a></li>

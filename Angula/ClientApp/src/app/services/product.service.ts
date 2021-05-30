@@ -27,9 +27,13 @@ export class ProductService {
     //return this.http.get<any>(`${environment.ApiUrl}api/Products/detail`, httpOptions).toPromise().then(res => res);
     return this.restAPI.get("api", "Products/detail/" + productId, null, null).toPromise().then(res => res);
   }
-  getproduct_in_category(category_id: any) {
-    return this.restAPI.get("api", "Products/findproductincategory/" + category_id, null, null).toPromise().then(res => res);
-
+  getproduct_in_keyword_category(keyword: any, category_id: any, pageSize: any, page: any) {
+    let path: string = "Products/findproductincategory/" + pageSize + "/" + page + "/" + category_id;
+    //if (keyword) path = path + "/" + keyword;
+    return this.restAPI.get("api", path,  null, null).toPromise().then(res => res);
+  }
+  getproduct_in_keyword_category_Pagging(keyword: any, category_id: any, pageSize: any, page: any) {
+    return this.restAPI.get("api", "Products/findproductincategoryPagging/" + category_id + "/" + keyword + "/" + pageSize + "/" + page, null, null).toPromise().then(res => res);
   }
   update(productId, product) {
     const httpOptions = {

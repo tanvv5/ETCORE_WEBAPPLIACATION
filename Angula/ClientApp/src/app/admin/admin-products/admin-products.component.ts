@@ -1,7 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-//import { ProductService } from 'src/app/product.service';
 import { Observable, Subscription } from 'rxjs';
-//import { AngularFireList } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 import { AlertService } from '../../services/alert.service.service';
 import { ProductService } from '../../services/product.service';
@@ -39,7 +37,9 @@ export class AdminProductsComponent implements OnInit {
     }
     this.items = this.products;
   }
+  delete(item: any) {
 
+  }
   ngOnInit() {
   }
 }

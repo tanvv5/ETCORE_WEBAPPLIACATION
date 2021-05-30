@@ -33,6 +33,9 @@ import { CategoryComponent } from './category/category.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { SearchComponent } from './search/search.component';
 import { SearchformComponent } from './search/searchform/searchform.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
@@ -48,10 +51,12 @@ export function tokenGetter() {
     , AlertComponent, RegisterComponent, PageNotFoundComponentComponent, ProductCardComponent, ShoppingCartComponent
     , AdminOrdersComponent, ProductFormComponent, AdminProductsComponent, EmptyCartComponent, CartLeftComponent, FooterComponent, ShopsComponent,
     ProductDetailComponent, LeftSidebarComponent, CategoryComponent, CheckoutComponent, SearchComponent, SearchformComponent
+    , DashboardComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
+    NgxPaginationModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -72,12 +77,14 @@ export function tokenGetter() {
 
       { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthenticationService, AdminAuthGuard] },
       { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthenticationService, AdminAuthGuard] },
+      { path: 'admin/dashboard', component: DashboardComponent },
       { path: 'card', component: ShoppingCartComponent },
       { path: 'checkout', component: CheckoutComponent },
       { path: 'product-detail', component: ProductDetailComponent },
       { path: 'category', component: CategoryComponent },
       { path: 'search', component: SearchComponent }
-    ])
+    ]),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

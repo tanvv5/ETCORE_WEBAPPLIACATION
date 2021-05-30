@@ -1,38 +1,42 @@
 <p><a routerLink="/admin/products/new" class="btn btn-primary">New product</a></p>
-
 <p>
-  <input #query (input)="filter(query.value)" type="text" class="form-control" placeholder="Search...">
+  <!--<input #query (input)="filter(query.value)" type="text" class="form-control" placeholder="Search...">-->
 </p>
-
-
-<<!--data-table [items]="items"
-            [itemCount]="items.length"
-            (reload)="reloadItems($event)">
-
-  <data-table-column [property]="'ProName'"
-                     [header]="'ProName'"
-                     [sortable]="true"
-                     [resizable]="true">
-
-  </data-table-column>
-
-
-  <data-table-column [property]="'Unit'"
-                     [header]="'Price'"
-                     [sortable]="true"
-                     [resizable]="true">
-
-  </data-table-column>
-
-  <ng-template #dataTableCell let-item="item">
-    {{ item.Unit | currency:'USD':true}}
-  </ng-template>
-
-  <data-table-column [property]="'ProId'">
-    <ng-template #dataTableCell let-item="item">
-      <a [routerLink]="['/admin/products/',item.ProId]">Edit</a>
-    </ng-template>
-  </data-table-column>
-</data-table>-->
+<h6 class="pb-2 mb-0">Products</h6>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ProName</th>
+      <th scope="col">ProCategory</th>
+      <th scope="col">Unit</th>
+      <th scope="col">StockQuatity</th>
+      <th scope="col">Price</th>
+      <th scope="col">Status</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>
+        <!--<span *ngIf="item.new" class="badge badge-primary">new</span>-->
+        {{item.ProName}}
+      </td>
+      <td>{{item.ProCategory}}</td>
+      <td>{{item.Unit}}</td>
+      <td>{{item.StockQuatity}}</td>
+      <td>{{item.Price}}</td>
+      <td>{{item.Status}}</td>
+      <td>{{item.Description}}</td>
+      <td>
+        <button (click)="delete(item)" class="btn btn-danger btn-sm">
+          <span class="oi oi-trash"></span>
+        </button>
+      </td>
+    </tr>
+    <tr *ngIf="loading">
+      <td colspan="5" align="center">Fetching Product</td>
+    </tr>
+  </tbody>
+</table>
 
 

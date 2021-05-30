@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 
 namespace ETCORE_WEBAPPLIACATION.Controllers
 {
-    [Authorize(Roles = "Admin,SupperAdmin")]
+    //[Authorize(Roles = "Admin,SupperAdmin")]
+    [Authorize()]
     public class AdministratorController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager1;
