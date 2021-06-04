@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service.service';
 import { User } from '../_models';
+import { AppSettings } from '../_share/AppSettings';
 
 @Component({
   selector: 'app-nav-menu',
@@ -25,14 +26,15 @@ export class NavMenuComponent implements OnInit {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
+    , private appSetting: AppSettings
   ) {
   }
   ngOnInit() {
     this.authenticationService.isLoggedIn.subscribe(data => {
       this.isLoggedIn = data;
-      this.user = JSON.parse(localStorage.getItem('currentUser'));
+      this.user = JSON.parse(this.appSetting.getWithExpiry('currentUser'));
       console.log("isLoggedIn menu: " + data);
-      var obj = JSON.parse(localStorage.getItem('currentUser'));
+      //var obj = JSON.parse(localStorage.getItem('currentUser'));
       //console.log("curent user: " + this.user.UserName);
     });
   }

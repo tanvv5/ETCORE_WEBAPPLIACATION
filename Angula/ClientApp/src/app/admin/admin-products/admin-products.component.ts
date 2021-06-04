@@ -1,4 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PaginationInstance } from 'ngx-pagination';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AlertService } from '../../services/alert.service.service';
@@ -11,35 +13,61 @@ import { Product } from '../../_models/product';
   styleUrls: ['./admin-products.component.css']
 })
 export class AdminProductsComponent implements OnInit {
-  products: Product[];
   subscription: Subscription;
   items: Product[] = [];
   itemCount: number;
+  public filter: string = '';
+  public maxSize: number = 7;
+  public directionLinks: boolean = true;
+  public autoHide: boolean = false;
+  public responsive: boolean = false;
   public response: Response;
-  constructor(private productService: ProductService, private alertService: AlertService) {
-    this.productService.getAll()
-    .then(result => {
+  public config: PaginationInstance = {
+    id: 'product_page',
+    itemsPerPage: 9,
+    currentPage: 1,
+    totalItems: 0
+  };
+  public labels: any = {
+    previousLabel: 'Previous',
+    nextLabel: 'Next',
+    screenReaderPaginationLabel: 'Pagination',
+    screenReaderPageLabel: 'page',
+    screenReaderCurrentLabel: `You're on page`
+  };
+  public eventLog: string[] = [];
+  private popped = [];
+  constructor(private productService: ProductService, private alertService: AlertService, private activeRooter: ActivatedRoute) {    
+  }
+  ngOnInit() {
+    this.reloadData(this.config.itemsPerPage, this.config.currentPage);
+  }
+  reloadData(pageSize: any, page: any) {
+    this.productService.getproduct_in_keyword_category("", 1, pageSize, page)
+      .then(result => {
         var obj = JSON.parse(JSON.stringify(result));
-        this.response = new Response();
         if (obj.Message == "Success") {
-          this.products = JSON.parse(JSON.stringify(obj.Model));
-          this.items = this.products;
-        }
-        else {
-          console.log(JSON.stringify(obj.Result));
-          this.alertService.error(obj.ErrorMessage);
+          this.items = obj.Model;
+          this.config.totalItems = obj.ItemsCount;
+          console.log("itemacount:");
+          console.log(obj.ItemsCount);
+          console.log(obj);
         }
       }, error => console.log(error));
-  }
-  reloadItems(params) {
-    if (!this.products) {
-      return;
-    }
-    this.items = this.products;
   }
   delete(item: any) {
 
   }
-  ngOnInit() {
+  //pagginate
+  onPageChange(number: number) {
+    console.log(`pageChange(${number})`);
+    this.config.currentPage = number;
+    this.reloadData(this.config.itemsPerPage, this.config.currentPage);
+  }
+
+  onPageBoundsCorrection(number: number) {
+    console.log(`pageBoundsCorrection(${number})`);
+    this.config.currentPage = number;
+    this.reloadData(this.config.itemsPerPage, this.config.currentPage);
   }
 }

@@ -34,8 +34,16 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { SearchComponent } from './search/search.component';
 import { SearchformComponent } from './search/searchform/searchform.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { DashboardModule } from './admin/dashboard/dashboard.module';
+import { AuthModule } from './admin/auth/auth.module';
+import { DefaultComponent } from './admin/layouts/default/default.component';
+import { AuthComponent } from './admin/layouts/auth/auth.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { AdminloginComponent } from './admin/auth/adminlogin/adminlogin.component';
+import { ExponentialStrengthPipe } from './exponential-strength.pipe';
+import { AppSettings } from './_share/AppSettings';
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
@@ -50,8 +58,8 @@ export function tokenGetter() {
     , JwPaginationComponent, LoginComponent
     , AlertComponent, RegisterComponent, PageNotFoundComponentComponent, ProductCardComponent, ShoppingCartComponent
     , AdminOrdersComponent, ProductFormComponent, AdminProductsComponent, EmptyCartComponent, CartLeftComponent, FooterComponent, ShopsComponent,
-    ProductDetailComponent, LeftSidebarComponent, CategoryComponent, CheckoutComponent, SearchComponent, SearchformComponent
-    , DashboardComponent
+    ProductDetailComponent, LeftSidebarComponent, CategoryComponent, CheckoutComponent, SearchComponent, SearchformComponent, AuthComponent
+    , DefaultComponent, DashboardComponent, AdminloginComponent, ExponentialStrengthPipe,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -66,7 +74,26 @@ export function tokenGetter() {
     }),
     FormsModule, ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      //{
+      //  path: '',
+      //  component: DefaultComponent,
+      //  children: [
+      //    {
+      //      path: '',
+      //      redirectTo: '/dashboad',
+      //      pathMatch: 'full'
+      //    },
+      //    {
+      //      path: 'dashboad',
+      //      loadChildren: () =>
+      //        import('./admin/dashboard/dashboard.module').then(m => m.DashboardModule)
+      //    }
+      //  ]
+      //},
+      {
+        path: '',
+        component: HomeComponent
+      },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'vantan', component: VantanLearningAngularcomponent },
@@ -76,17 +103,19 @@ export function tokenGetter() {
       { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthenticationService, AdminAuthGuard] },
 
       { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthenticationService, AdminAuthGuard] },
-      { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthenticationService, AdminAuthGuard] },
-      { path: 'admin/dashboard', component: DashboardComponent },
+      { path: 'admin/products', component: AdminProductsComponent},
+
       { path: 'card', component: ShoppingCartComponent },
       { path: 'checkout', component: CheckoutComponent },
       { path: 'product-detail', component: ProductDetailComponent },
       { path: 'category', component: CategoryComponent },
       { path: 'search', component: SearchComponent }
     ]),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatButtonModule,
+    DashboardModule
   ],
-  providers: [],
+  providers: [AppSettings],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,7 @@
 <p><a routerLink="/admin/products/new" class="btn btn-primary">New product</a></p>
-<p>
-  <!--<input #query (input)="filter(query.value)" type="text" class="form-control" placeholder="Search...">-->
-</p>
+<!--<p>
+  <input #query (input)="filter(query.value)" type="text" class="form-control" placeholder="Search...">
+</p>-->
 <h6 class="pb-2 mb-0">Products</h6>
 <table class="table">
   <thead>
@@ -16,7 +16,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of items">
+    <tr *ngFor="let item of items | paginate: config">
       <td>
         <!--<span *ngIf="item.new" class="badge badge-primary">new</span>-->
         {{item.ProName}}
@@ -26,11 +26,27 @@
       <td>{{item.StockQuatity}}</td>
       <td>{{item.Price}}</td>
       <td>{{item.Status}}</td>
-      <td>{{item.Description}}</td>
+      <td>{{item.Description.substring(0,100)}}</td>
       <td>
         <button (click)="delete(item)" class="btn btn-danger btn-sm">
           <span class="oi oi-trash"></span>
         </button>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="6">
+        <pagination-controls [id]="config.id"
+                             [maxSize]="maxSize"
+                             [directionLinks]="directionLinks"
+                             [autoHide]="autoHide"
+                             [responsive]="responsive"
+                             [previousLabel]="labels.previousLabel"
+                             [nextLabel]="labels.nextLabel"
+                             [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                             [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                             [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+                             (pageChange)="onPageChange($event)"
+                             (pageBoundsCorrection)="onPageBoundsCorrection($event)"></pagination-controls>
       </td>
     </tr>
     <tr *ngIf="loading">
