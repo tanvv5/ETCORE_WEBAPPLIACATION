@@ -12,11 +12,30 @@ namespace ETCORE_WEBAPPLIACATION.Models
         {
             _appDbContext = appDbContext;
         }
-        public Products Add(Products product)
+        public ProductsViewModel Add(ProductsViewModel productcreate)
         {
+            Products product = new Products
+            {
+                Description = productcreate.Description,
+                Price = productcreate.Price,
+                ProCategory = productcreate.ProCategory,
+                ProName = productcreate.ProName,
+                Status = productcreate.Status,
+                StockQuatity = productcreate.StockQuatity,
+                Unit = productcreate.Unit
+            };
+
             _appDbContext.Products.Add(product);
             _appDbContext.SaveChanges();
-            return product;
+            int id_pro = product.ProId;
+            //thêm mới photo cho products
+            foreach (Photo pt in productcreate.Photos)
+            {
+                pt.ProductId = id_pro;
+                _appDbContext.Photo.Add(pt);
+            }
+            _appDbContext.SaveChanges();
+            return productcreate;
         }
 
 
@@ -31,23 +50,87 @@ namespace ETCORE_WEBAPPLIACATION.Models
             return product;
         }
 
-        public List<Products> GetALLProducts()
+        public List<ProductsViewModel> GetALLProducts()
         {
-            return _appDbContext.Products.ToList();
+            var rslist_products = _appDbContext.Products.Select(c => new ProductsViewModel
+            {
+                ProId = c.ProId,
+                ProName = c.ProName,
+                ProCategory = c.ProCategory,
+                Unit = c.Unit,
+                StockQuatity = c.StockQuatity,
+                Price = c.Price,
+                Status = c.Status,
+                Description = c.Description,
+                Photos = null
+            }).ToList();
+            foreach (ProductsViewModel products in rslist_products)
+            {
+                products.Photos = GetChildren(products.ProId);
+            }
+            return rslist_products;
         }
-
-        public Products GetProducts(int ProId)
+        private List<Photo> GetChildren(int ProId)
         {
-            Products product= _appDbContext.Products.Find(ProId);
-            return product;
+            return _appDbContext.Photo
+                    .Where(c => c.ProductId == ProId && c.Status == "1")
+                    .ToList();
         }
-
-        public Products Update(Products products)
+        public ProductsViewModel GetProducts(int ProId)
         {
-            var pr =_appDbContext.Products.Attach(products);
-            pr.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            Products product = _appDbContext.Products.Find(ProId);
+            List<Photo> photo = _appDbContext.Photo.Where(x => x.ProductId == ProId).ToList();
+            ProductsViewModel productViewModel = new ProductsViewModel
+            {
+                ProId = product.ProId,
+                ProName = product.ProName,
+                ProCategory = product.ProCategory,
+                Unit = product.Unit,
+                StockQuatity = product.StockQuatity,
+                Price = product.Price,
+                Status = product.Status,
+                Description = product.Description,
+                Photos = photo!=null?photo:null
+            };
+            return productViewModel;
+        }
+        public ProductsViewModel Update(ProductsViewModel productsedit)
+        {
+            Products product = _appDbContext.Products.Find(productsedit.ProId);
+            product.Description = productsedit.Description;
+            product.Price = productsedit.Price;
+            product.ProCategory = productsedit.ProCategory;
+            product.ProName = productsedit.ProName;
+            product.Status = productsedit.Status;
+            product.StockQuatity = productsedit.StockQuatity;
+            product.Unit = productsedit.Unit;
             _appDbContext.SaveChanges();
-            return products;
+            //xoa image va update 
+            //thêm mới photo cho products
+            //thêm mới photo cho products
+            _appDbContext.Photo.Where(x => x.ProductId == product.ProId).ToList().ForEach(p => _appDbContext.Photo.Remove(p));
+            _appDbContext.SaveChanges();
+            foreach (Photo pt in productsedit.Photos)
+            {
+                pt.ProductId = product.ProId;
+                pt.Status = "1";
+                _appDbContext.Photo.Add(pt);
+            }
+            _appDbContext.SaveChanges();
+            return productsedit;
+        }
+
+        public List<Category> getCategory()
+        {
+            List<Category> category = _appDbContext.Category.Where(r => r.Status == "1").Select(t => new Category
+            {
+                Id = t.Id,
+                Status = t.Status,
+                Created = t.Created,
+                Name = t.Name,
+                ParentId = t.ParentId
+            }).ToList();
+            return category;
         }
     }
 }

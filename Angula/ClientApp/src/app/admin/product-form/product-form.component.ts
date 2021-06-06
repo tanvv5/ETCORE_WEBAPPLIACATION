@@ -11,7 +11,6 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./product-form.component.css']
 })
 export class ProductFormComponent implements OnInit {
-
   categories$: any[];
   product = {};
   id;
@@ -23,18 +22,15 @@ export class ProductFormComponent implements OnInit {
       if (obj.Message == "Success") {
         this.categories$ = JSON.parse(JSON.stringify(obj.Model));
       }
-      //else {
-      //  this.alertService.error(obj.ErrorMessage);
-      //}
       console.log(this.categories$);
     }, error => console.log(error));;
-
+    //#region trường hợp edit sản phẩm
     this.id = this.route.snapshot.paramMap.get('id');
     console.log(this.id);
     if (this.id) {
       this.productService.get(this.id).then(p => this.product = p);
     }
-
+    //#endregion
   }
   save(product) {
     if (this.id) {

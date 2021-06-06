@@ -33,7 +33,7 @@ namespace ETCORE_WEBAPPLIACATION.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Test page title";
-            List<Products> _products = _productsRepository.GetALLProducts();
+            List<ProductsViewModel> _products = _productsRepository.GetALLProducts();
             ViewData["Products"] = _products;
             return View();
         }
@@ -46,8 +46,8 @@ namespace ETCORE_WEBAPPLIACATION.Controllers
         public IActionResult Detail(int? id)
         {
             ViewBag.Title = "Detail Product title";
-            Products _product = _productsRepository.GetProducts(id ?? 1);
-            if(_product == null)
+            ProductsViewModel _product = _productsRepository.GetProducts(id ?? 1);
+            if (_product == null)
             {
                 Response.StatusCode = 404;
                 return View("NotFound");
@@ -58,7 +58,8 @@ namespace ETCORE_WEBAPPLIACATION.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            return View();
+            var rs = _productsRepository.getCategory();
+            return View(rs);
         }
         [HttpPost]
         [Obsolete]
@@ -66,28 +67,35 @@ namespace ETCORE_WEBAPPLIACATION.Controllers
         {
             if (ModelState.IsValid)
             {
+                List<Photo> listphoto = new List<Photo>();
                 string fullnamefile = null;
                 string UniqueFilename = null;
                 if (products.image != null)
                 {
                     foreach (IFormFile formFile in products.image)
                     {
-                        string uploadFodel = Path.Combine(_hostingEnvironment1.WebRootPath + "\\images");
+                        string uploadFodel = Path.Combine(_hostingEnvironment1.WebRootPath + "\\user\\images");
                         UniqueFilename = Guid.NewGuid().ToString() + "_" + formFile.FileName;
                         string filepath = Path.Combine(uploadFodel + "\\" + UniqueFilename);
                         formFile.CopyTo(new FileStream(filepath, FileMode.Create));
                         fullnamefile += UniqueFilename + ";";
+                        listphoto.Add(new Photo
+                        {
+                            Name = fullnamefile,
+                            Featured = filepath,
+                            Status = "1",
+                        });
                     }
                 }
-                Products productsmodel = new Products
+                ProductsViewModel productsmodel = new ProductsViewModel
                 {
                     ProName = products.ProName,
                     ProCategory = products.ProCategory,
-                    StockQuatity = products.StockQuatity ?? 0,
+                    StockQuatity = products.StockQuatity,
                     Unit = products.Unit,
-                    image = fullnamefile
+                    Photos = listphoto
                 };
-                Products products1 = _productsRepository.Add(productsmodel);
+                ProductsViewModel products1 = _productsRepository.Add(productsmodel);
                 return RedirectToAction("Detail", new { id = products1.ProId });
             }
             return View();
@@ -100,7 +108,7 @@ namespace ETCORE_WEBAPPLIACATION.Controllers
             productsedit1.ProId = products1.ProId;
             productsedit1.ProName = products1.ProName;
             productsedit1.ProCategory = products1.ProCategory;
-            productsedit1.ExistImage = products1.image;
+            productsedit1.ExistImage = products1.Photos.Count > 0 ? products1.Photos[0].Featured : "";
             productsedit1.Unit = products1.Unit;
             productsedit1.StockQuatity = products1.StockQuatity;
             return View(productsedit1);
@@ -112,18 +120,17 @@ namespace ETCORE_WEBAPPLIACATION.Controllers
             if (ModelState.IsValid)
             {
                 var productsedit = _productsRepository.GetProducts(products.ProId);
-                string fullnamefile = NewMethodProcessImage(products);
-                if (fullnamefile != null)
+                List<Photo> photo = NewMethodProcessImage(products);
+                if (photo.Count>0)
                 {
-                    productsedit.image = fullnamefile;
                     //xóa file cũ
-                    if(products.ExistImage!= null)
+                    if (products.ExistImage != null)
                     {
-                        foreach(string p in products.ExistImage.Split(";"))
+                        foreach (string p in products.ExistImage.Split(";"))
                         {
                             if (!string.IsNullOrEmpty(p))
                             {
-                                string oldPath = Path.Combine(_hostingEnvironment1.WebRootPath + "\\images\\" + p);
+                                string oldPath = Path.Combine(_hostingEnvironment1.WebRootPath + "\\user\\images\\" + p);
                                 System.IO.File.Delete(oldPath);
                             }
                         }
@@ -131,33 +138,37 @@ namespace ETCORE_WEBAPPLIACATION.Controllers
                 }
                 productsedit.ProName = products.ProName;
                 productsedit.ProCategory = products.ProCategory;
-                productsedit.StockQuatity = products.StockQuatity ?? 0;
+                productsedit.StockQuatity = products.StockQuatity;
                 productsedit.Unit = products.Unit;
 
-                Products products1 = _productsRepository.Update(productsedit);
+                ProductsViewModel products1 = _productsRepository.Update(productsedit);
                 return RedirectToAction("Detail", new { id = products1.ProId });
             }
             return View();
         }
 
         [Obsolete]
-        private string NewMethodProcessImage(ProductsEditModel products)
+        private List<Photo> NewMethodProcessImage(ProductsEditModel products)
         {
-            string fullnamefile = null;
+            List<Photo> photo = new List<Photo>();
             string UniqueFilename = null;
             if (products.image != null)
             {
                 foreach (IFormFile formFile in products.image)
                 {
-                    string uploadFodel = Path.Combine(_hostingEnvironment1.WebRootPath + "\\images");
+                    string uploadFodel = Path.Combine(_hostingEnvironment1.WebRootPath + "\\user\\images");
                     UniqueFilename = Guid.NewGuid().ToString() + "_" + formFile.FileName;
                     string filepath = Path.Combine(uploadFodel + "\\" + UniqueFilename);
                     formFile.CopyTo(new FileStream(filepath, FileMode.Create));
-                    fullnamefile += UniqueFilename + ";";
+                    photo.Add(new Photo
+                    {
+                        Name = UniqueFilename,
+                        Featured = filepath,
+                        ProductId = products.ProId
+                    });
                 }
             }
-
-            return fullnamefile;
+            return photo;
         }
         [Route("Error")]
         [AllowAnonymous]

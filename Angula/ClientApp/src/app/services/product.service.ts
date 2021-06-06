@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -10,21 +11,17 @@ import { RestAPI } from './RestAPI.service';
 export class ProductService {
 
   constructor(private http: HttpClient, private restAPI: RestAPI) { }
-
+  private extractData(res: Response): any {
+    const body = res;
+    return body || { };
+  }
   create(product) {
-    
+
   }
   getAll() {
     return this.restAPI.get("api", "Products", null, null).toPromise().then(res=>res);
   }
   get(productId) {
-    //const httpOptions = {
-    //  headers: new HttpHeaders().set(
-    //    "Authorization",
-    //    "Bearer ".concat(localStorage.getItem('token'))),
-    //  params: new HttpParams().set("id", productId)
-    //};
-    //return this.http.get<any>(`${environment.ApiUrl}api/Products/detail`, httpOptions).toPromise().then(res => res);
     return this.restAPI.get("api", "Products/detail/" + productId, null, null).toPromise().then(res => res);
   }
   getproduct_in_keyword_category(keyword: any, category_id: any, pageSize: any, page: any) {
@@ -39,7 +36,7 @@ export class ProductService {
     const httpOptions = {
       headers: new HttpHeaders().set(
         "Authorization",
-        "Bearer ".concat(localStorage.getItem('token'))),      
+        "Bearer ".concat(localStorage.getItem('token'))),
       params: new HttpParams().set("id", productId)
     };
     return this.http.put<any>(`${environment.ApiUrl}api/UserInfo`, product, httpOptions).toPromise().then(res => res);

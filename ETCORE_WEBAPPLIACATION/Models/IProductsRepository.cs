@@ -7,10 +7,11 @@ namespace ETCORE_WEBAPPLIACATION.Models
 {
     public interface IProductsRepository
     {
-        Products GetProducts(int ProId);
-        List<Products> GetALLProducts();
-        Products Add(Products products);
+        ProductsViewModel GetProducts(int ProId);
+        List<ProductsViewModel> GetALLProducts();
+        ProductsViewModel Add(ProductsViewModel productcreate);
         Products Delete(int ProId);
-        Products Update(Products products);
+        ProductsViewModel Update(ProductsViewModel productsedit);
+        List<Category> getCategory();
     }
 }

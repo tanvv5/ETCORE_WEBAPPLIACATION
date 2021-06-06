@@ -99,13 +99,7 @@ export function tokenGetter() {
       { path: 'vantan', component: VantanLearningAngularcomponent },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
-      { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthenticationService, AdminAuthGuard] },
-      { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthenticationService, AdminAuthGuard] },
-
-      { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthenticationService, AdminAuthGuard] },
-      { path: 'admin/products', component: AdminProductsComponent},
-
-      { path: 'card', component: ShoppingCartComponent },
+       { path: 'card', component: ShoppingCartComponent },
       { path: 'checkout', component: CheckoutComponent },
       { path: 'product-detail', component: ProductDetailComponent },
       { path: 'category', component: CategoryComponent },

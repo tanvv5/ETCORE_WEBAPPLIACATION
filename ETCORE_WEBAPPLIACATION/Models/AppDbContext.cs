@@ -14,6 +14,8 @@ namespace ETCORE_WEBAPPLIACATION.Models
 
         }
         public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<Photo> Photo { get; set; }
+        public virtual DbSet<Category> Category { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

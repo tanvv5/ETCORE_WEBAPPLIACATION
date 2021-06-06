@@ -15,13 +15,16 @@ namespace ETCORE_WEBAPPLIACATION.Models
         [Required]
         public string ProName { get; set; }
         [Required]
-        public string ProCategory { get; set; }
+        public int ProCategory { get; set; }
         [Required]
-        [RegularExpression(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$")]
         public string Unit { get; set; }
         [Required]
         [Range(0, 100000)]
         public int StockQuatity { get; set; }
-        public string image { get; set; }
+        [Required]
+        public double Price { get; set; }
+        [Required]
+        public string Status { get; set; }
+        public string Description { get; set; }
     }
 }

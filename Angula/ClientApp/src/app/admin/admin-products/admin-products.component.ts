@@ -37,7 +37,7 @@ export class AdminProductsComponent implements OnInit {
   };
   public eventLog: string[] = [];
   private popped = [];
-  constructor(private productService: ProductService, private alertService: AlertService, private activeRooter: ActivatedRoute) {    
+  constructor(private productService: ProductService, private alertService: AlertService, private activeRooter: ActivatedRoute) {
   }
   ngOnInit() {
     this.reloadData(this.config.itemsPerPage, this.config.currentPage);

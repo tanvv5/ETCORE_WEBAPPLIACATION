@@ -10,19 +10,20 @@ namespace ETCORE_WEBAPPLIACATION.Models
 {
     public class ProductsCeateModel
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProId { get; set; }
         [Required]
         public string ProName { get; set; }
         [Required]
-        public string ProCategory { get; set; }
+        public int ProCategory { get; set; }
         [Required]
-        [RegularExpression(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$")]
         public string Unit { get; set; }
         [Required]
         [Range(0, 100000)]
-        public int? StockQuatity { get; set; }
+        public int StockQuatity { get; set; }
+        [Required]
+        public double Price { get; set; }
+        public string Status { get; set; }
+        public string Description { get; set; }
         public List<IFormFile> image { get; set; }
     }
 }

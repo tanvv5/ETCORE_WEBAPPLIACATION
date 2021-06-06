@@ -2,11 +2,11 @@
 @{
     ViewData["Title"] = "Edit Product";
     string parthfirst = null;
-    if (Model.ExistImage != null)
+    if (!string.IsNullOrEmpty(Model.ExistImage))
     {
-        parthfirst = Model.ExistImage.Split(";")[0].ToString();
+        parthfirst = Model.ExistImage;
     }
-    var pathinfo = "~/images/" + (parthfirst ?? "noimage.jpg");
+    var pathinfo = "~/user/images/" + (parthfirst ?? "noimage.jpg");
 }
 <form enctype="multipart/form-data" asp-controller="Home" asp-action="edit" method="post" class="mt-3">
     <div class="form-group row">

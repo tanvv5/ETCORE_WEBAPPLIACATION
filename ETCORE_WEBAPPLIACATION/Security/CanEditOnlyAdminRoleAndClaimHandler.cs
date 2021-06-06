@@ -13,14 +13,6 @@ namespace ETCORE_WEBAPPLIACATION.Security
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
             ManagementAdminRoleAndClaimRequirement requirement)
         {
-            //var authFilterContext = context.Resource as AuthorizationFilterContext;
-            //if (authFilterContext == null)
-            //{
-            //    return Task.CompletedTask;
-            //}
-            //string loggedInAdminId = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
-            //string adminIdbeginEdited = authFilterContext.HttpContext.Request.Query["userId"];
-
             if ((context.User.IsInRole("Admin")
                 && context.User.HasClaim(claim => claim.Type == "Edit Role"))
                 || context.User.IsInRole("SupperAdmin")

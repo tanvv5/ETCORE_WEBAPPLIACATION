@@ -1,19 +1,19 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-    var products = ViewData["Products"] as List<Products>;
+    var products = ViewData["Products"] as List<ProductsViewModel>;
 }
 
 <div class="wrapper">
     <div class="container">
         <div class="row g-1">
-            @foreach (Products products1 in products)
+            @foreach (ProductsViewModel products1 in products)
             {
                 string parthfirst = null;
-                if (products1.image != null)
+                if (products1.Photos.Count>0)
                 {
-                    parthfirst = products1.image.Split(";")[0].ToString();
+                    parthfirst = products1.Photos[0].Featured;
                 }
-                var pathinfo = "~/images/" + (parthfirst ?? "noimage.jpg");
+                var pathinfo = "~/user/images/" + (parthfirst ?? "noimage.jpg");
                 <div class="col-md-3">
                     <div class="card p-3">
                         <div class="text-center">
