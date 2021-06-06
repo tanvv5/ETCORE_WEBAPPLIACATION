@@ -44,6 +44,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { AdminloginComponent } from './admin/auth/adminlogin/adminlogin.component';
 import { ExponentialStrengthPipe } from './exponential-strength.pipe';
 import { AppSettings } from './_share/AppSettings';
+import { UploadComponent } from './upload/upload.component';
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
@@ -59,7 +60,7 @@ export function tokenGetter() {
     , AlertComponent, RegisterComponent, PageNotFoundComponentComponent, ProductCardComponent, ShoppingCartComponent
     , AdminOrdersComponent, ProductFormComponent, AdminProductsComponent, EmptyCartComponent, CartLeftComponent, FooterComponent, ShopsComponent,
     ProductDetailComponent, LeftSidebarComponent, CategoryComponent, CheckoutComponent, SearchComponent, SearchformComponent, AuthComponent
-    , DefaultComponent, DashboardComponent, AdminloginComponent, ExponentialStrengthPipe,
+    , DefaultComponent, DashboardComponent, AdminloginComponent, ExponentialStrengthPipe, UploadComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -103,7 +104,8 @@ export function tokenGetter() {
       { path: 'checkout', component: CheckoutComponent },
       { path: 'product-detail', component: ProductDetailComponent },
       { path: 'category', component: CategoryComponent },
-      { path: 'search', component: SearchComponent }
+      { path: 'search', component: SearchComponent },
+      { path: 'upload', component: UploadComponent }
     ]),
     BrowserAnimationsModule,
     MatButtonModule,

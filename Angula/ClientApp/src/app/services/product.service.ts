@@ -16,7 +16,7 @@ export class ProductService {
     return body || { };
   }
   create(product) {
-
+    return this.restAPI.post("api", "Products", product, null);
   }
   getAll() {
     return this.restAPI.get("api", "Products", null, null).toPromise().then(res=>res);

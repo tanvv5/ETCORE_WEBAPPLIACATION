@@ -15,15 +15,15 @@ export class RestAPI {
   }
   Gettoken() {
     const body = { Id: 0,Password: this.PassWord, UserName: this.UserName };
-    const header = { 'content-type': 'application/json', 'Accept': 'application/json', 'responseType': 'text', 'KeyAPI': '' };        
+    const header = { 'content-type': 'application/json', 'Accept': 'application/json', 'responseType': 'text', 'KeyAPI': '' };
     var dateexpire = this.jwtHelper.getTokenExpirationDate(localStorage.getItem('token'));
     var d = new Date();
     if (d > dateexpire || localStorage.getItem('token') == null) {
-      console.log(this.BASE_URL +"api/Token"); 
+      console.log(this.BASE_URL +"api/Token");
       this.http.post<any>(`${this.BASE_URL}api/Token`, body, { headers: header })
         .pipe(first()).subscribe(data => {
           var obj = JSON.parse(JSON.stringify(data));
-          console.log(" check abcd: " + JSON.stringify(data)); 
+          console.log(" check abcd: " + JSON.stringify(data));
           if (data.Message == "Success") {
             localStorage.setItem('token', obj.Result);
             console.log("token get api: " + obj.Result);
