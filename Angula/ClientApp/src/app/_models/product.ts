@@ -1,9 +1,9 @@
 export interface Product {
-  ProId: string;
+  ProId: number;
   ProName: string;
   ProCategory: number;
-  Unit: number;
-  StockQuatity: string;
+  Unit: string;
+  StockQuatity: number;
   Price: number;
   Status: string;
   Description: string;

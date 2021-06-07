@@ -19,9 +19,9 @@ const routes: Routes = [
       },
       // { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthenticationService, AdminAuthGuard] },
       { path: 'products/new', component: ProductFormComponent, canActivate: [AuthenticationService] },
-
+      { path: 'products/new/:id', component: ProductFormComponent, canActivate: [AuthenticationService] },
       { path: 'products/:id', component: ProductFormComponent, canActivate: [AuthenticationService, AdminAuthGuard] },
-      { path: 'products', component: AdminProductsComponent},
+      { path: 'products', component: AdminProductsComponent, canActivate: [AuthenticationService] },
     ]
   }
 ];

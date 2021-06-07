@@ -4,11 +4,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { ProductService } from '../../services/product.service';
 import { first } from 'rxjs/operators';
-import { FormGroup,FormBuilder,Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert.service.service';
 import { Product } from 'src/app/_models/product';
 import { UploadFilesService } from 'src/app/services/upload-files.service';
 import { HttpEventType } from '@angular/common/http';
+import { Category } from 'src/app/_models/Category';
 
 @Component({
   selector: 'app-product-form',
@@ -16,7 +17,7 @@ import { HttpEventType } from '@angular/common/http';
   styleUrls: ['./product-form.component.css']
 })
 export class ProductFormComponent implements OnInit {
-  categories$: any[];
+  categories$: Category[];
   formProduct: FormGroup;
   id: any;
   loading = false;
@@ -25,33 +26,45 @@ export class ProductFormComponent implements OnInit {
   selectedFiles: FileList;
   progressInfos = [];
   product: Product;
-//#region contructor and init
-  constructor(private alertService: AlertService ,private route: ActivatedRoute, private router: Router, private categoryService: CategoryService,
-    private productService: ProductService,private formBuilder: FormBuilder,private uploadService: UploadFilesService) {
+  isAddMode: boolean;
+  //#region contructor and init
+  constructor(private alertService: AlertService, private route: ActivatedRoute, private router: Router, private categoryService: CategoryService,
+    private productService: ProductService, private formBuilder: FormBuilder, private uploadService: UploadFilesService) {
     categoryService.getCategories().then(result => {
       var obj = JSON.parse(JSON.stringify(result));
       this.response = new Response();
       if (obj.Message == "Success") {
         this.categories$ = JSON.parse(JSON.stringify(obj.Model));
       }
-      console.log(this.categories$);
-    }, error => console.log(error));;
-    //trường hợp edit sản phẩm
-    this.id = this.route.snapshot.paramMap.get('id');
-    console.log(this.id);
-    if (this.id) {
-      this.productService.get(this.id).then(p => this.product = p);
-    }
+    }, error => console.log(error));
   }
   ngOnInit() {
+    this.isAddMode = true;
+    //khởi tạo giá trị form
     this.formProduct = this.formBuilder.group({
       ProName: ['', Validators.required],
-      Price: ['', Validators.required,Validators.min(0)],
+      Price: ['', [Validators.required, Validators.min(0)]],
       ProCategory: ['', Validators.required],
       Unit: [''],
-      StockQuatity: ['', Validators.required,Validators.min(0)],
-      Description:['']
+      StockQuatity: ['', [Validators.required, Validators.min(0)]],
+      Description: [''],
+      Status: ['1']
+    });
+    //trường hợp edit sản phẩm
+    this.route.paramMap.subscribe(param => {
+      this.id = param.get('id');
     })
+    if (this.id) {
+      this.productService.get(this.id).then(p => {
+        if (p.Message == "Success") {
+          this.product = p.Model;
+          console.log("edit sản phẩm: ");
+          console.log(this.product);
+          this.formProduct.patchValue(this.product);
+        }
+      });
+      this.isAddMode = false;
+    }
   }
   //#endregion contructor and init
   onSubmit() {
@@ -66,28 +79,55 @@ export class ProductFormComponent implements OnInit {
     }
 
     this.loading = true;
+    var numProact = Number(this.formProduct.get("ProCategory").value);
+    this.formProduct.patchValue({
+      ProCategory: numProact
+    });
     this.product = this.formProduct.value;
-
-    this.productService.create(this.product)
-      .pipe(first())
-      .subscribe(
-        data => {
-          console.log(JSON.stringify(data));
-          if (data.Message == "Success") {
-            this.alertService.success("thêm mới sản phẩm thành công.", true);
-            this.uploadFiles(data.Resul);
-          }
-          else {
-            console.log(JSON.stringify(data.Result));
-            this.alertService.error(data.Result);
+    console.log(this.product);
+    if (this.isAddMode)
+      this.productService.create(this.product)
+        .pipe(first())
+        .subscribe(
+          data => {
+            console.log(JSON.stringify(data));
+            if (data.Message == "Success") {
+              this.alertService.success("thêm mới sản phẩm thành công.", true);
+              this.uploadFiles(data.Result);
+              this.router.navigate(['/admin/products']);
+            }
+            else {
+              console.log(JSON.stringify(data.Result));
+              this.alertService.error(data.Result);
+              this.loading = false;
+            }
+          },
+          error => {
+            this.alertService.error(error);
             this.loading = false;
-          }
-        },
-        error => {
-          this.alertService.error(error);
-          this.loading = false;
-        });
-    this.router.navigate(['/admin/products']);
+          });
+    else {
+      this.product.ProId = Number(this.id);
+      this.productService.update(this.id, this.product)
+        .then(
+          data => {
+            console.log(JSON.stringify(data));
+            if (data.Message == "Success") {
+              this.alertService.success("Cập nhật sản phẩm thành công.", true);
+              this.uploadFiles(data.Result);
+              this.router.navigate(['/admin/products']);
+            }
+            else {
+              console.log(JSON.stringify(data.Result));
+              this.alertService.error(data.Result);
+              this.loading = false;
+            }
+          },
+          error => {
+            this.alertService.error(error);
+            this.loading = false;
+          });
+    }
   }
   get f() { return this.formProduct.controls; }
   delete() {
@@ -121,14 +161,15 @@ export class ProductFormComponent implements OnInit {
     }
   }
   uploadFiles(proId: any) {
-    for (let i = 0; i < this.selectedFiles.length; i++) {
-      this.upload(i, this.selectedFiles[i],proId);
-    }
+    if (this.selectedFiles!==undefined)
+      for (let i = 0; i < this.selectedFiles.length; i++) {
+        this.upload(i, this.selectedFiles[i], proId);
+      }
   }
-  upload(idx, file,proId: any) {
+  upload(idx, file, proId: any) {
     this.progressInfos[idx] = { value: 0, fileName: file.name };
 
-    this.uploadService.upload(file,proId).subscribe(
+    this.uploadService.upload(file, proId).subscribe(
       event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progressInfos[idx].percentage = Math.round(100 * event.loaded / event.total);

@@ -23,14 +23,14 @@ export class AuthenticationService implements CanActivate {
     if (this.appSetting.getWithExpiry('currentUser'))
       this.loggedIn = new BehaviorSubject<boolean>(true);
   }
-  canActivate(route, state: RouterStateSnapshot) {
-    if (this.loggedIn.asObservable()) {
-      return true;
-    }
-    else {
-      this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-      return false;
-    }
+  canActivate(route, state: RouterStateSnapshot) : Observable<boolean> {
+    var result_boolean: any;
+    this.isLoggedIn.subscribe(data => {
+      result_boolean  = data;
+      console.log("login: ");
+      console.log(result_boolean);
+    });
+    return result_boolean;
   }
   public get currentUserValue() {
     return this.currentUserSubject.asObservable();
@@ -55,7 +55,7 @@ export class AuthenticationService implements CanActivate {
           user.UserName = username;
           user.Roles = obj.Result;
           //localStorage.setItem('currentUser', JSON.stringify(user));
-          this.appSetting.setWithExpiry('currentUser', JSON.stringify(user), 600000);
+          this.appSetting.setWithExpiry('currentUser', JSON.stringify(user), 3600000);
           this.loggedIn.next(true);
           this.currentUserSubject.next(user);
         }

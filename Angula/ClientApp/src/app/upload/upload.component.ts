@@ -47,10 +47,10 @@ export class UploadComponent implements OnInit {
   }
   uploadFiles() {
     this.message = '';
-
-    for (let i = 0; i < this.selectedFiles.length; i++) {
-      this.upload(i, this.selectedFiles[i]);
-    }
+    if (this.selectedFiles !== undefined)
+      for (let i = 0; i < this.selectedFiles.length; i++) {
+        this.upload(i, this.selectedFiles[i]);
+      }
   }
   upload(idx, file) {
     this.progressInfos[idx] = { value: 0, fileName: file.name };

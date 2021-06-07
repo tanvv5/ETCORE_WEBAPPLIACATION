@@ -16,7 +16,15 @@ export class ProductService {
     return body || { };
   }
   create(product) {
-    return this.restAPI.post("api", "Products", product, null);
+    console.log(product);
+    // return this.restAPI.post("api", "Products/add", product, null);
+    const httpOptions = {
+      headers: new HttpHeaders().set(
+        "Authorization",
+        "Bearer ".concat(localStorage.getItem('token'))),
+      params: null
+    };
+    return this.http.post<any>(`${environment.ApiUrl}api/Products/add`, product, httpOptions);
   }
   getAll() {
     return this.restAPI.get("api", "Products", null, null).toPromise().then(res=>res);
@@ -25,8 +33,8 @@ export class ProductService {
     return this.restAPI.get("api", "Products/detail/" + productId, null, null).toPromise().then(res => res);
   }
   getproduct_in_keyword_category(keyword: any, category_id: any, pageSize: any, page: any) {
-    let path: string = "Products/findproductincategory/" + pageSize + "/" + page + "/" + category_id;
-    //if (keyword) path = path + "/" + keyword;
+    let path: string = "Products/findproductincategory/" + pageSize + "/" + page + "/" + category_id+ "/" + keyword;
+    // if (keyword) path = path + "/" + keyword;
     return this.restAPI.get("api", path,  null, null).toPromise().then(res => res);
   }
   getproduct_in_keyword_category_Pagging(keyword: any, category_id: any, pageSize: any, page: any) {
@@ -36,10 +44,9 @@ export class ProductService {
     const httpOptions = {
       headers: new HttpHeaders().set(
         "Authorization",
-        "Bearer ".concat(localStorage.getItem('token'))),
-      params: new HttpParams().set("id", productId)
+        "Bearer ".concat(localStorage.getItem('token')))
     };
-    return this.http.put<any>(`${environment.ApiUrl}api/UserInfo`, product, httpOptions).toPromise().then(res => res);
+    return this.http.put<any>(`${environment.ApiUrl}api/Products/update/${productId}`, product, httpOptions).toPromise().then(res => res);
   }
   delete(productId) {
     const httpOptions = {

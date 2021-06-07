@@ -3,11 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class RestAPI {
-  private BASE_URL = "http://localhost:5000/";
+  private BASE_URL = environment.ApiUrl;
   private UserName = "tan.hondacuoi@gmail.com";
   private PassWord = "Vantan@2125";
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {

@@ -1,10 +1,13 @@
 <div class="row">
   <div class="col-md-12 col-sm-12">
     <alert></alert>
+    <h1 *ngIf="isAddMode">Add Product</h1>
+    <h1 *ngIf="!isAddMode">Edit Product</h1>
     <form [formGroup]="formProduct" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="ProName">ProName</label>
-        <input formControlName="ProName" type="text" class="form control">
+        <input formControlName="ProName" class="form-control" />
+        <input formControlName="Status" type="hidden" value="1" />
         <div *ngIf="submitted && f.ProName.errors" class="invalid-feedback">
           <div *ngIf="f.ProName.errors.required">Last Name is required</div>
         </div>
@@ -12,8 +15,8 @@
       <div class="form-group">
         <label for="Price">Price</label>
         <div class="input-group-prepend">
-          <span class="input-group-text">$</span>
-          <input formControlName="Price" type="number" class="form control">
+          <span class="input-group-text">VNĐ</span>
+          <input formControlName="Price" type="number" class="form-control" />
         </div>
         <div *ngIf="submitted && f.Price.errors" class="invalid-feedback">
           <div *ngIf="f.Price.errors.required">Price required</div>
@@ -21,56 +24,81 @@
       </div>
       <div class="form-group">
         <label for="Category">Category</label>
-        <select formControlName="ProCategory" type="text" class="form control">
-          <option value=""></option>
-          <option *ngFor="let c of categories$ | async" [value]="c.$key">{{c.name}}</option>
+        <select formControlName="ProCategory" class="form-control">
+          <option value="0">Chọn chuyên mục</option>
+          <optgroup
+            label="{{ category.Name }}"
+            *ngFor="let category of categories$"
+          >
+            <option
+              value="{{ catelement.Id }}"
+              *ngFor="let catelement of category.subCategories"
+            >
+              {{ catelement.Name }}
+            </option>
+          </optgroup>
         </select>
         <div *ngIf="submitted && f.ProCategory.errors" class="invalid-feedback">
-          <div *ngIf="f.ProCategory.errors.required">Category  is required</div>
+          <div *ngIf="f.ProCategory.errors.required">Category is required</div>
         </div>
       </div>
       <div class="form-group">
         <label for="Unit">Unit</label>
         <div class="input-group-prepend">
-          <span class="input-group-text">$</span>
-          <input  formControlName="Unit" class="form control">
+          <input formControlName="Unit" class="form-control" />
         </div>
         <div *ngIf="submitted && f.Unit.errors" class="invalid-feedback">
-          <div *ngIf="f.Unit.errors.required">Unit  is required</div>
+          <div *ngIf="f.Unit.errors.required">Unit is required</div>
         </div>
       </div>
       <div class="form-group">
         <label for="StockQuatity">StockQuatity</label>
         <div class="input-group-prepend">
-          <span class="input-group-text">$</span>
-          <input  formControlName="StockQuatity" class="form control">
+          <input
+            type="number"
+            formControlName="StockQuatity"
+            class="form-control"
+          />
         </div>
-        <div *ngIf="submitted && f.StockQuatity.errors" class="invalid-feedback">
-          <div *ngIf="f.StockQuatity.errors.required">StockQuatity  is required</div>
+        <div
+          *ngIf="submitted && f.StockQuatity.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="f.StockQuatity.errors.required">
+            StockQuatity is required
+          </div>
+          <!-- <div *ngIf="f.StockQuatity.errors.min">StockQuatity min 0/div> -->
         </div>
       </div>
       <div class="form-group">
         <label for="Description">Description</label>
         <div class="input-group-prepend">
-          <span class="input-group-text">$</span>
-          <textarea  formControlName="Description" class="form control" placeholder="Mô tả sản phẩm" rows="3"></textarea>
+          <textarea
+            formControlName="Description"
+            class="form-control"
+            placeholder="Mô tả sản phẩm"
+            rows="3"
+          ></textarea>
         </div>
         <div *ngIf="submitted && f.Description.errors" class="invalid-feedback">
-          <div *ngIf="f.Description.errors.required">Price  is required</div>
+          <div *ngIf="f.Description.errors.required">Price is required</div>
         </div>
       </div>
       <div class="form-group">
         <label for="imageUrl">Image Url</label>
-        <input type="file" accept="image/*" multiple (change)="selectFiles($event)" />
+        <input
+          type="file"
+          accept="image/*"
+          multiple
+          (change)="selectFiles($event)"
+        />
       </div>
       <div class="form-group">
         <button class="btn btn-primary">Save</button>
-        <button type="button" (click)="delete()" class="btn btn-primary">Delete</button>
+        <button type="button" (click)="delete()" class="btn btn-primary">
+          Delete
+        </button>
       </div>
     </form>
   </div>
 </div>
-
-
-
-

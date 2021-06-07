@@ -1,55 +1,92 @@
-<p><a routerLink="/admin/products/new" class="btn btn-primary">New product</a></p>
-<p>
-  <input #query  type="text" class="form-control" placeholder="Search...">
-</p>
-<h6 class="pb-2 mb-0">Products</h6>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">ProName</th>
-      <th scope="col">ProCategory</th>
-      <th scope="col">Unit</th>
-      <th scope="col">StockQuatity</th>
-      <th scope="col">Price</th>
-      <th scope="col">Status</th>
-      <th scope="col">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of items | paginate: config">
-      <td>
-        <!--<span *ngIf="item.new" class="badge badge-primary">new</span>-->
-        {{item.ProName}}
-      </td>
-      <td>{{item.ProCategory}}</td>
-      <td>{{item.Unit}}</td>
-      <td>{{item.StockQuatity}}</td>
-      <td>{{item.Price}}</td>
-      <td>{{item.Status}}</td>
-      <td>{{item.Description.substring(0,100)}}</td>
-      <td>
-        <button (click)="delete(item)" class="btn btn-danger btn-sm">
-          <span class="oi oi-trash"></span>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="6">
-        <pagination-controls [id]="config.id"
-                             [maxSize]="maxSize"
-                             [directionLinks]="directionLinks"
-                             [autoHide]="autoHide"
-                             [responsive]="responsive"
-                             [previousLabel]="labels.previousLabel"
-                             [nextLabel]="labels.nextLabel"
-                             [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
-                             [screenReaderPageLabel]="labels.screenReaderPageLabel"
-                             [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
-                             (pageChange)="onPageChange($event)"
-                             (pageBoundsCorrection)="onPageBoundsCorrection($event)"></pagination-controls>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-
+<alert></alert>
+<div class="table-responsive">
+  <div class="table-wrapper">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-sm-4">
+          <input
+            #query
+            type="text"
+            class="form-control"
+            placeholder="Search..."
+            (blur)="filter(query.value)"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <h2 class="pb-2 mb-0">Products</h2>
+        </div>
+        <div class="col-sm-4">
+          <a
+            routerLink="/admin/products/new"
+            class="btn btn-primary pull-right"
+          >
+            <i class="fa fa-plus"></i> New product</a
+          >
+        </div>
+      </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ProName</th>
+          <th scope="col">ProCategory</th>
+          <th scope="col">Unit</th>
+          <th scope="col">StockQuatity</th>
+          <th scope="col">Price</th>
+          <th scope="col">Status</th>
+          <th scope="col">Description</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items | paginate: config">
+          <td>
+            <!--<span *ngIf="item.new" class="badge badge-primary">new</span>-->
+            {{ item.ProName }}
+          </td>
+          <td>{{ item.ProCategory }}</td>
+          <td>{{ item.Unit }}</td>
+          <td>{{ item.StockQuatity }}</td>
+          <td>{{ item.Price }}</td>
+          <td>{{ item.Status }}</td>
+          <td>{{ item.Description.substring(0, 100) }}</td>
+          <td style="width: 120px;">
+            <!-- <a
+              class="add"
+              (click)="delete(item)"
+              title="Add"
+              data-toggle="tooltip"
+              ><i class="material-icons">&#xE03B;</i></a
+            >-->
+            <a [routerLink]="['/admin/products/new', item.ProId]"  class="edit" title="Edit" data-toggle="tooltip"
+              ><i class="material-icons">&#xE254;</i></a
+            >
+            <a class="delete" (click)="delete(item)" title="Delete" data-toggle="tooltip"
+              ><i class="material-icons">&#xE872;</i></a
+            >
+          </td>
+        </tr>
+        <tr>
+          <td colspan="6">
+            <pagination-controls
+              [id]="config.id"
+              [maxSize]="maxSize"
+              [directionLinks]="directionLinks"
+              [autoHide]="autoHide"
+              [responsive]="responsive"
+              [previousLabel]="labels.previousLabel"
+              [nextLabel]="labels.nextLabel"
+              [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+              [screenReaderPageLabel]="labels.screenReaderPageLabel"
+              [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+              (pageChange)="onPageChange($event)"
+              (pageBoundsCorrection)="onPageBoundsCorrection($event)"
+            ></pagination-controls>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
