@@ -1,3 +1,4 @@
+//định nghĩa Pipe có có thể dùng trong tất cả các html component
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({

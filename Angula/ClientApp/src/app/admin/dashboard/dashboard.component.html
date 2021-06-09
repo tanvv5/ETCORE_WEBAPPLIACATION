@@ -1,37 +1,160 @@
 <h2>List User</h2>
 <ul class="heroes">
-  <li *ngFor="let userRegister of UserRegisters" (click)="onSelect(userRegister)">
-    <span class="badge">{{userRegister.UserName}}</span>{{userRegister.LastName}}
+  <li
+    *ngFor="let userRegister of UserRegisters"
+    (click)="onSelect(userRegister)"
+  >
+    <span class="badge">{{ userRegister.UserName }}</span
+    >{{ userRegister.LastName }}
   </li>
 </ul>
 <div *ngIf="selecteduserRegister">
-
   <h2>{{ selecteduserRegister.UserName | uppercase }} Details</h2>
-  <div><span>FirstName: </span>{{selecteduserRegister.UserName}}</div>
+  <div><span>FirstName: </span>{{ selecteduserRegister.UserName }}</div>
   <div>
     <label>
       UserName:
-      <input [(ngModel)]="selecteduserRegister.UserName" (ngModelChange)="setUppercaseName($event)" placeholder="UserName">
+      <input
+        [(ngModel)]="selecteduserRegister.UserName"
+        placeholder="UserName"
+      />
     </label>
   </div>
-
 </div>
 <div>
-  Pick your favorite hero
-  (<label><input type="checkbox" checked (change)="showSad = !showSad">show nam</label>)
+  Pick your favorite hero (<label
+    ><input type="checkbox" checked (change)="showSad = !showSad" />show
+    nam</label
+  >)
 </div>
 <select [(ngModel)]="hero">
-  <ng-container *ngFor="let h of UserRegisters">
+  <ng-container *ngFor="let h of UserRegisters; let i = index">
     <ng-container *ngIf="showSad || h.UserName !== 'Tân Vũ'">
-      <option [ngValue]="h.UserName">{{h.UserName}} ({{h.LastName}})</option>
+      <option [ngValue]="h.UserName">
+        {{ i + h.UserName }} ({{ h.LastName }})
+      </option>
     </ng-container>
   </ng-container>
 </select>
 
 <h2>Power Boost Calculator</h2>
-<div [style]="styleExpression" [class]="classExpression">Normal power: <input #abc [(ngModel)]="power"></div>
-<div>Boost factor: <input [(ngModel)]="factor"></div>
+<div>Normal power: <input #abc [(ngModel)]="power" /></div>
+<div>Boost factor: <input [(ngModel)]="factor" /></div>
 <p>
-  lay gia tri: {{factor}}
-  Super Hero Power: {{power | exponentialStrength: factor}}
+  lay gia tri: {{ factor }} Super Hero Power:
+  {{ abc.value | exponentialStrength: factor }}
 </p>
+
+<h2>Thêm mới item price trong formgroup</h2>
+<div class="row">
+  <div class="col-md-6 mf-3">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <table class="table table-bordered" formArrayName="quantities">
+        <tr>
+          <th colspan="2">Add Multiple Quantity:</th>
+          <th width="150px">
+            <button
+              type="button"
+              (click)="addQuantity()"
+              class="btn btn-primary"
+            >
+              Add More
+            </button>
+          </th>
+        </tr>
+        <tr
+          *ngFor="let quantity of t.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <td>
+            Quantity : {{ i }}
+            <input type="text" formControlName="qty" class="form-control" />
+          </td>
+          <td>
+            Price:
+            <input type="text" formControlName="price" class="form-control" />
+          </td>
+          <td>
+            <button (click)="removeQuantity(i)" class="btn btn-danger">
+              Remove
+            </button>
+          </td>
+        </tr>
+      </table>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+    <br />
+    {{ this.productForm.value | json }}
+  </div>
+  <div class="col-md-6 mf-3">
+    <form [formGroup]="DisCountForm" (ngSubmit)="onSubmitDiscount()">
+      <table class="table table-bordered" formArrayName="levels">
+        <tr>
+          <th colspan="2">Add Multiple Quantity:</th>
+          <th width="150px">
+            <button
+              type="button"
+              (click)="addDiscount()"
+              class="btn btn-primary"
+            >
+              Add More
+            </button>
+          </th>
+        </tr>
+        <tr
+          *ngFor="let level of tl.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <td>
+            sumTotal : {{ i }}
+            <input type="text" formControlName="sum" class="form-control" />
+            <div *ngIf="submitted_tl && fl.levels.controls[i].controls.sum.errors" class="invalid-feedback">
+              <div *ngIf="fl.levels.controls[i].controls.sum.errors?.required">
+                required
+              </div>
+              <div *ngIf="fl.levels.controls[i].controls.sum.errors?.minlength">
+                tối thiểu 2 ký tự
+              </div>
+            </div>
+          </td>
+          <td>
+            Discount %:
+            <input type="text" formControlName="dis" class="form-control" />
+            <!-- <div *ngIf="submitted_tl && fl.dis.errors" class="invalid-feedback">
+              <div *ngIf="fl.dis.errors?.min">
+                Minimum required number is 0.
+              </div>
+            </div> -->
+          </td>
+          <td>
+            <button (click)="removeDiscount(i)" class="btn btn-danger">
+              Remove
+            </button>
+          </td>
+        </tr>
+      </table>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+    <br />
+    {{ this.DisCountForm.value | json }}
+  </div>
+  <div class="row">
+    <h2>Result Merge</h2>
+    <div class="col-md-12 mf-3">
+      <table>
+        <thead>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>sumTotal</th>
+          <th>Discount %</th>
+        </thead>
+        <tr *ngFor="let quantity of ResultList; let i = index">
+          <td>{{quantity.qty}}</td>
+          <td>{{quantity.price}}</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

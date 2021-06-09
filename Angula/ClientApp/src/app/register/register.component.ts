@@ -82,7 +82,6 @@ export class RegisterComponent implements OnInit {
 
     // reset alerts on submit
     this.alertService.clear();
-
     // stop here if form is invalid
     if (this.registerForm.invalid) {
       return;
@@ -92,7 +91,6 @@ export class RegisterComponent implements OnInit {
     var user_info: UserRegister = new UserRegister();
     user_info.UserName = this.registerForm.get('username').value;
     user_info.Password = this.registerForm.get("password").value;
-
     this.userService.register(user_info)
       .pipe(first())
       .subscribe(
