@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
@@ -27,6 +27,7 @@ export class ProductFormComponent implements OnInit {
   progressInfos = [];
   product: Product;
   isAddMode: boolean;
+  @Output() addSuccess = new EventEmitter<string>();
   //#region contructor and init
   constructor(private alertService: AlertService, private route: ActivatedRoute, private router: Router, private categoryService: CategoryService,
     private productService: ProductService, private formBuilder: FormBuilder, private uploadService: UploadFilesService) {
@@ -93,6 +94,7 @@ export class ProductFormComponent implements OnInit {
             console.log(JSON.stringify(data));
             if (data.Message == "Success") {
               this.alertService.success("thêm mới sản phẩm thành công.", true);
+              this.addSuccess.emit("true");
               this.uploadFiles(data.Result);
               this.router.navigate(['/admin/products']);
             }

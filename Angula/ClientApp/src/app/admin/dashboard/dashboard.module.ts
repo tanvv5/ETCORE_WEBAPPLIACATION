@@ -8,6 +8,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service.s
 import { ProductFormComponent } from '../product-form/product-form.component';
 import { AdminProductsComponent } from '../admin-products/admin-products.component';
 import { AdminAuthGuard } from 'src/app/services/admin-auth-guard.service';
+import { URCComponent } from '../urc/urc.component';
 const routes: Routes = [
   {
     path: 'admin',
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: 'products/:id', component: ProductFormComponent, canActivate: [AuthenticationService, AdminAuthGuard] },
       { path: 'products', component: AdminProductsComponent, canActivate: [AuthenticationService] },
       { path: 'orders', component: AdminOrdersComponent, canActivate: [AuthenticationService] },
+      { path: 'URC', component: URCComponent }
     ]
   }
 ];

@@ -45,9 +45,24 @@ import { AdminloginComponent } from './admin/auth/adminlogin/adminlogin.componen
 import { ExponentialStrengthPipe } from './exponential-strength.pipe';
 import { AppSettings } from './_share/AppSettings';
 import { UploadComponent } from './upload/upload.component';
+import {MatFormFieldModule,MatMenuModule,MatCheckboxModule,MatIconModule,MatNativeDateModule, MAT_DATE_FORMATS} from '@angular/material';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { URCComponent } from './admin/urc/urc.component';
+import { AsignWSComponent } from './admin/asign-ws/asign-ws.component'
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
+export const MY_DATE_FORMAT = {
+  parse: {
+    dateInput: 'DD-MM-YYYY',
+  },
+  display: {
+    dateInput: 'MMM DD, YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  },
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +75,7 @@ export function tokenGetter() {
     , AlertComponent, RegisterComponent, PageNotFoundComponentComponent, ProductCardComponent, ShoppingCartComponent
     , AdminOrdersComponent, ProductFormComponent, AdminProductsComponent, EmptyCartComponent, CartLeftComponent, FooterComponent, ShopsComponent,
     ProductDetailComponent, LeftSidebarComponent, CategoryComponent, CheckoutComponent, SearchComponent, SearchformComponent, AuthComponent
-    , DefaultComponent, DashboardComponent, AdminloginComponent, ExponentialStrengthPipe, UploadComponent,
+    , DefaultComponent, DashboardComponent, AdminloginComponent, ExponentialStrengthPipe, UploadComponent, URCComponent, AsignWSComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -108,10 +123,11 @@ export function tokenGetter() {
       { path: 'upload', component: UploadComponent }
     ]),
     BrowserAnimationsModule,
-    MatButtonModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     DashboardModule
   ],
-  providers: [AppSettings],
+  providers: [AppSettings,{ provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMAT }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

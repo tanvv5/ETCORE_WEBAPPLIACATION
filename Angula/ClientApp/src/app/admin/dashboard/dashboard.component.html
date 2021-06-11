@@ -88,6 +88,15 @@
   </div>
   <div class="col-md-6 mf-3">
     <form [formGroup]="DisCountForm" (ngSubmit)="onSubmitDiscount()">
+      <div class="form-group">
+        <label for="startDate">Last Name</label>
+        <input type="text" formControlName="startDate" [matDatepicker]="picker" class="form-control" [ngClass]="{ 'is-invalid': submitted_tl && fl.startDate.errors }" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <div *ngIf="submitted_tl && fl.startDate.errors" class="invalid-feedback">
+          <div *ngIf="fl.startDate.errors.required">startDate is required</div>
+        </div>
+      </div>
       <table class="table table-bordered" formArrayName="levels">
         <tr>
           <th colspan="2">Add Multiple Quantity:</th>

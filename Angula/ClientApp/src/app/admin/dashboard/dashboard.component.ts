@@ -1,4 +1,4 @@
-import { FormGroup, FormBuilder, Validators, FormArray, FormControl, ValidationErrors, ValidatorFn  } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { UserRegister } from '../../_models/user_register';
 
@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   submitted_t = false;
   submitted_tl = false;
   ResultList: any;
+  startDateModel: Date;
   UserRegisters: UserRegister[] = [
     { FirstName: "11", LastName: 'Tân Vũ', UserName: "Tân Vũ", Password: "11111" },
     { FirstName: "12", LastName: 'Mr. Nice', UserName: "Hùng", Password: "22222" },
@@ -28,13 +29,14 @@ export class DashboardComponent implements OnInit {
       quantities: new FormArray([this.newQuantity()])
     });
     this.DisCountForm = this.formbuild.group({
+      startDate: [''],
       levels: new FormArray([this.newLevel()])
     });
   }
   newLevel() {
     return this.formbuild.group({
-      sum: ['', [Validators.required,Validators.minLength(2)]],
-      dis: ['', [Validators.required,Validators.minLength(2)]],
+      sum: ['', [Validators.required, Validators.minLength(2)]],
+      dis: ['', [Validators.required, Validators.minLength(2)]],
     })
   }
   addDiscount(): void {
@@ -63,7 +65,7 @@ export class DashboardComponent implements OnInit {
     if (this.productForm.invalid) {
       return;
     }
-    this.ResultList =this.t.value;
+    this.ResultList = this.t.value;
     console.log(this.ResultList);
   }
 
@@ -81,7 +83,7 @@ export class DashboardComponent implements OnInit {
     this.t.removeAt(i);
   }
   onSubmitDiscount() {
-    this.submitted_tl=true;
+    this.submitted_tl = true;
 
     if (this.DisCountForm.invalid) {
       console.log("lỗi gì nào?");

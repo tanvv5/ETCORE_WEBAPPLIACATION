@@ -1,0 +1,151 @@
+<div class="row">
+  <form [formGroup]="formsearch">
+    <div class="row m-2">
+      <div class="col-md-4 mf-3">
+        <input
+          type="text"
+          id="name"
+          name="name"
+          formControlName="name"
+          class="form-control"
+          placeholder="Họ tên"
+        />
+      </div>
+      <div class="col-md-4 mf-3">
+        <input
+          type="text"
+          id="regno"
+          name="regno"
+          formControlName="regno"
+          class="form-control"
+          placeholder="CCCD/CMND/Hộ chiếu"
+        />
+      </div>
+      <div class="col-md-4 mf-3">
+        <input
+          type="text"
+          id="phone"
+          name="phone"
+          formControlName="phone"
+          class="form-control"
+          placeholder="Điện thoại"
+        />
+      </div>
+    </div>
+    <div class="row m-2">
+      <div class="col-md-4 mf-3">
+        <select formControlName="phone" class="form-control">
+          <option [ngValue]="null" [disabled]="true">Nhóm khách hàng</option>
+          <option value="1">Nhóm 1</option>
+          <option value="2">Nhóm 2</option>
+        </select>
+      </div>
+      <div class="col-md-4 mf-3">
+        <input
+          type="date"
+          id="daterecall"
+          name="daterecall"
+          formControlName="daterecall"
+          class="form-control"
+          placeholder="Ngày hẹn gọi lại"
+        />
+      </div>
+      <div class="col-md-4 mf-3">
+        <select formControlName="statusCall" class="form-control">
+          <option [ngValue]="null" [disabled]="true">
+            Tình trạng cuộc gọi
+          </option>
+          <option value="1">Chưa gọi</option>
+          <option value="2">Không liện lạc được</option>
+          <option value="3">Gọi thành công</option>
+        </select>
+      </div>
+    </div>
+    <div class="row m-2">
+      <div class="col-md-4">
+        <input
+          type="text"
+          id="contractno"
+          name="contractno"
+          formControlName="contractno"
+          class="form-control rounded"
+          placeholder="Hợp đồng"
+        />
+      </div>
+      <div class="col-md-4 mf-3">
+        <select formControlName="cluster" class="form-control">
+          <option [ngValue]="null" [disabled]="true">ALL</option>
+          <option value="1">Cluster 1</option>
+          <option value="2">Cluster 2</option>
+          <option value="3">Cluster 3</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <button (click)="onSubmit()" class="btn btn-primary">Tìm kiếm</button>
+        <button class="btn btn-primary" (click) = "show()">Phân bổ</button>
+        <button (click)="export_excel()" class="btn btn-primary">
+          Kết xuất
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <h2>Result Merge</h2>
+    <div class="col-md-12 mf-3">
+      <table class="table">
+        <thead>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+          <th scope="col">sumTotal</th>
+          <th scope="col">Discount %</th>
+        </thead>
+        <tbody>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tbody>
+        <!-- <tr *ngFor="let quantity of ResultList; let i = index">
+          <td>{{ quantity.qty }}</td>
+          <td>{{ quantity.price }}</td>
+          <td></td>
+          <td></td>
+        </tr> -->
+      </table>
+    </div>
+  </div>
+</div>
+<div
+  [style.display]="showModal ? 'block' : 'none'"
+  class="modal"
+  id="imagemodal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Register</h4>
+      </div>
+      <div class="modal-body">
+        <app-product-form (addSuccess)="closepopup($event)"></app-product-form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-dark"
+          data-dismiss="modal"
+          (click)="hide()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
