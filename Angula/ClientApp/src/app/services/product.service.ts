@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Response } from '../_models/Response';
 import { RestAPI } from './RestAPI.service';
+import { Product } from '../_models/product';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,6 +26,18 @@ export class ProductService {
       params: null
     };
     return this.http.post<any>(`${environment.ApiUrl}api/Products/add`, product, httpOptions);
+  }
+  create_multi(product: Product[]){
+    console.log("List product:");
+    console.log({products:product});
+    let body = {products:product};
+    const httpOptions = {
+      headers: new HttpHeaders().set(
+        "Authorization",
+        "Bearer ".concat(localStorage.getItem('token'))),
+      params: null
+    };
+    return this.http.post<any>(`${environment.ApiUrl}api/Products/addmulti`, body, httpOptions);
   }
   getAll() {
     return this.restAPI.get("api", "Products", null, null).toPromise().then(res=>res);

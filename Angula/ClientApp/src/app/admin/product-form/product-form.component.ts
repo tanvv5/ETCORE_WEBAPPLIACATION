@@ -96,7 +96,7 @@ export class ProductFormComponent implements OnInit {
               this.alertService.success("thêm mới sản phẩm thành công.", true);
               this.addSuccess.emit("true");
               this.uploadFiles(data.Result);
-              this.router.navigate(['/admin/products']);
+              // this.router.navigate(['/admin/products']);
             }
             else {
               console.log(JSON.stringify(data.Result));
@@ -163,6 +163,7 @@ export class ProductFormComponent implements OnInit {
     }
   }
   uploadFiles(proId: any) {
+    console.log(this.selectFiles);
     if (this.selectedFiles!==undefined)
       for (let i = 0; i < this.selectedFiles.length; i++) {
         this.upload(i, this.selectedFiles[i], proId);
@@ -173,6 +174,7 @@ export class ProductFormComponent implements OnInit {
 
     this.uploadService.upload(file, proId).subscribe(
       event => {
+        console.log("upload file result");console.log(event);
         if (event.type === HttpEventType.UploadProgress) {
           this.progressInfos[idx].percentage = Math.round(100 * event.loaded / event.total);
         }
