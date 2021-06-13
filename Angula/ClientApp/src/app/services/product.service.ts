@@ -1,5 +1,5 @@
 import { map } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -38,6 +38,19 @@ export class ProductService {
       params: null
     };
     return this.http.post<any>(`${environment.ApiUrl}api/Products/addmulti`, body, httpOptions);
+  }
+  create_multi_uploadfile(file: File){
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    console.log("url_post_image: ");
+    console.log(file);
+    const httpOptions = {
+      headers: new HttpHeaders().set(
+        "Authorization",
+        "Bearer ".concat(localStorage.getItem('token')))
+    };
+    const req = new HttpRequest('POST', `${environment.ApiUrl}api/Products/addProductfromfile`, formData,httpOptions);
+    return this.http.request(req);
   }
   getAll() {
     return this.restAPI.get("api", "Products", null, null).toPromise().then(res=>res);

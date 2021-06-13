@@ -144,7 +144,7 @@
             <!-- <app-product-form
               (addSuccess)="closepopup($event)"
             ></app-product-form> -->
-            <app-uploadExcel></app-uploadExcel>
+            <app-uploadExcel (addSuccess)="closepopup($event)"></app-uploadExcel>
           </div>
           <div class="modal-footer">
             <button

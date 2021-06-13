@@ -117,11 +117,11 @@
           <td>
             sumTotal : {{ i }}
             <input type="text" formControlName="sum" class="form-control" />
-            <div *ngIf="submitted_tl && fl.levels.controls[i].controls.sum.errors" class="invalid-feedback">
-              <div *ngIf="fl.levels.controls[i].controls.sum.errors?.required">
+            <div *ngIf="submitted_tl && level.controls.sum.errors" class="invalid-feedback">
+              <div *ngIf="level.controls.sum.errors?.required">
                 required
               </div>
-              <div *ngIf="fl.levels.controls[i].controls.sum.errors?.minlength">
+              <div *ngIf="level.controls.sum.errors?.minlength">
                 tối thiểu 2 ký tự
               </div>
             </div>
