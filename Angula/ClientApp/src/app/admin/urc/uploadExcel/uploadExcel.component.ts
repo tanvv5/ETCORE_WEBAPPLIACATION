@@ -1,6 +1,5 @@
 import { ProductService } from './../../../services/product.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { AnyAaaaRecord } from 'dns';
 import { ExcelService } from 'src/app/services/excel.service';
 import * as XLSX from 'xlsx';
 import { first } from 'rxjs/operators';

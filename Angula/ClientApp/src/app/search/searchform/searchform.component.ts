@@ -24,7 +24,7 @@ export class SearchformComponent implements OnInit {
         if (obj.Message == "Success") {
           this.categories = JSON.parse(JSON.stringify(obj.Model));
         }
-      }, error => console.log(error));  
+      }, error => console.log(error));
   }
   Search() {
     //alert((<HTMLInputElement>document.getElementById("SeachAllid")).value);

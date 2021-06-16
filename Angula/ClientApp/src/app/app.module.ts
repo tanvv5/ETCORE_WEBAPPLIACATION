@@ -50,6 +50,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { URCComponent } from './admin/urc/urc.component';
 import { AsignWSComponent } from './admin/asign-ws/asign-ws.component'
 import { UploadExcelComponent } from './admin/urc/uploadExcel/uploadExcel.component';
+import { MomentDateModule } from '@angular/material-moment-adapter';
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
@@ -127,6 +128,7 @@ export const MY_DATE_FORMAT = {
     BrowserAnimationsModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MomentDateModule,
     DashboardModule,
     MatTabsModule
   ],

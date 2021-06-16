@@ -58,10 +58,11 @@ export class ProductService {
   get(productId) {
     return this.restAPI.get("api", "Products/detail/" + productId, null, null).toPromise().then(res => res);
   }
-  getproduct_in_keyword_category(keyword: any, category_id: any, pageSize: any, page: any) {
-    let path: string = "Products/findproductincategory/" + pageSize + "/" + page + "/" + category_id+ "/" + keyword;
-    // if (keyword) path = path + "/" + keyword;
-    return this.restAPI.get("api", path,  null, null).toPromise().then(res => res);
+  getproduct_in_keyword_category(param: HttpParams) {
+    //cách 1 truyền trực tiếp bằng đường link
+    // let path: string = "Products/findproductincategory/" + pageSize + "/" + page + "/" + category_id+ "/" + keyword;
+    let path: string = "Products/findproductincategory";
+    return this.restAPI.get("api", path,  null, param).toPromise().then(res => res);
   }
   getproduct_in_keyword_category_Pagging(keyword: any, category_id: any, pageSize: any, page: any) {
     return this.restAPI.get("api", "Products/findproductincategoryPagging/" + category_id + "/" + keyword + "/" + pageSize + "/" + page, null, null).toPromise().then(res => res);
