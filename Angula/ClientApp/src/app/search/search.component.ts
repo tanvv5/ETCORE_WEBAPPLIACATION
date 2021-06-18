@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PaginationInstance } from 'ngx-pagination';
@@ -40,13 +41,18 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.reloadData(this.config.itemsPerPage, this.config.currentPage);
   }
-  reloadData(pageSize: any, page: any) {
+  reloadData(pageSize: any, currentPage: any) {
     this.activeRoote.paramMap.subscribe(data => {
       let categoryId = data.get('category');
       let keyword = data.get('keyword');
       console.log("categoryId: ");
-      console.log(categoryId + ` page${pageSize}` + ` page${page}`);
-      this.productService.getproduct_in_keyword_category_Pagging(keyword, categoryId, pageSize, page)
+      console.log(categoryId + ` page${pageSize}` + ` page${currentPage}`);
+      let param = new HttpParams();
+      if(pageSize) param = param.append('pageSize',pageSize);
+      if(currentPage)  param = param.append('currentPage',currentPage);
+      if(categoryId) param = param.append('categoryId',categoryId);
+      if(keyword)  param = param.append('keyword',keyword);
+      this.productService.getproduct_in_keyword_category(param)
         .then(result => {
           var obj = JSON.parse(JSON.stringify(result));
           if (obj.Message == "Success") {

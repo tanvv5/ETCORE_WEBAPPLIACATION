@@ -31,8 +31,9 @@
     <!--price-range-->
     <h2>Price Range</h2>
     <div class="well text-center">
-      <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br />
+      <input type="text" class="span2" (change)="getSliderValue($event)"  value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br />
       <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
+      <input id="width" type="range" value="250" min="50" max="10000000" (change)="getSliderValue($event)" />
     </div>
   </div><!--/price-range-->
 

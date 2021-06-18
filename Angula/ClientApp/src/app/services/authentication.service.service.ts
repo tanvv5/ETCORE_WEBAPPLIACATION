@@ -14,11 +14,11 @@ import { exit } from 'process';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService implements CanActivate {
   private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
+  // public currentUser: Observable<User>;
   private loggedIn = new BehaviorSubject<boolean>(false);
   constructor(private http: HttpClient, private alertService: AlertService, private router: Router, private restAPI: RestAPI, private appSetting: AppSettings) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-    this.currentUser = this.currentUserSubject.asObservable();
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(this.appSetting.getWithExpiry('currentUser')));
+    // this.currentUser = this.currentUserSubject.asObservable();
     ///biến này lưu toàn cục nên nếu load lại trang thì loggedIn sẽ biến mất nhé nên phải setlại loggedIN
     if (this.appSetting.getWithExpiry('currentUser'))
       this.loggedIn = new BehaviorSubject<boolean>(true);
@@ -57,7 +57,7 @@ export class AuthenticationService implements CanActivate {
           //localStorage.setItem('currentUser', JSON.stringify(user));
           this.appSetting.setWithExpiry('currentUser', JSON.stringify(user), 3600000);
           this.loggedIn.next(true);
-          this.currentUserSubject.next(user);
+          this.currentUserSubject.next(JSON.parse(this.appSetting.getWithExpiry('currentUser')));
         }
         else {
           console.log("Sucesss? " + JSON.stringify(data.Message));

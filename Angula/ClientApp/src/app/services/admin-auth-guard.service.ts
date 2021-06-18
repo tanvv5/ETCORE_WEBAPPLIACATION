@@ -15,7 +15,8 @@ export class AdminAuthGuard implements CanActivate {
     this.authService.currentUserValue
       .subscribe(
         data => {
-          result_boolean = data.Roles.indexOf("Admin") !== -1;
+          // console.log(JSON.parse(JSON.stringify(data)).value);
+          result_boolean = data.Roles.includes("Admin");
         });
     return result_boolean;
   }

@@ -1,189 +1,163 @@
 <mat-tab-group>
-  <mat-tab label="First">
-    <div class="row" style="margin-top: 10px;">
-      <div class="col-md-12">
-        <alert></alert>
-        <form [formGroup]="formsearch">
-          <div class="row m-2">
-            <div class="col-md-4 mf-3">
-              <input
-                type="text"
-                id="name"
-                name="name"
-                formControlName="name"
-                class="form-control"
-                placeholder="Họ tên"
-              />
-            </div>
-            <div class="col-md-4 mf-3">
-              <input
-                type="text"
-                id="regno"
-                name="regno"
-                formControlName="regno"
-                class="form-control"
-                placeholder="CCCD/CMND/Hộ chiếu"
-              />
-            </div>
-            <div class="col-md-4 mf-3">
-              <input
-                type="number"
-                formControlName="phone"
-                class="form-control"
-                placeholder="Điện thoại" (change)="onchangephone($event)"
-              />
-            </div>
-          </div>
-          <div class="row m-2">
-            <div class="col-md-4 mf-3">
-              <select formControlName="groupcustome" class="form-control">
-                <option [ngValue]="null" [disabled]="true">
+    <mat-tab label="First">
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-md-12">
+                <alert></alert>
+                <form [formGroup]="formsearch">
+                    <div class="row m-2">
+                        <div class="col-md-4 mf-3">
+                            <input type="text" id="name" name="name" formControlName="name" class="form-control" placeholder="Họ tên" />
+                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required">Name is required</div>
+                                <div *ngIf="f.name.errors.email">Name is email</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mf-3">
+                            <input type="text" id="regno" name="regno" formControlName="regno" class="form-control" placeholder="CCCD/CMND/Hộ chiếu" />
+                            <div *ngIf="submitted && f.regno.errors" class="invalid-feedback">
+                                <div *ngIf="f.regno.errors.required">regno is required</div>
+                                <div *ngIf="f.regno.errors.min">regno min 9</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mf-3">
+                            <input type="number" formControlName="phone" class="form-control" placeholder="Điện thoại" (change)="onchangephone($event)" />
+                            <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                                <div *ngIf="f.phone.errors.required">Password is required</div>
+                                <div *ngIf="f.phone.errors.phoneValidator">phoneValidator is not valid</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="col-md-4 mf-3">
+                            <select formControlName="groupcustome" class="form-control">
+                <option value="" selected>
                   Nhóm khách hàng
                 </option>
                 <option value="1">Nhóm 1</option>
                 <option value="2">Nhóm 2</option>
               </select>
-            </div>
-            <div class="col-md-4 mf-3">
-              <input
+                        </div>
+                        <div class="col-md-4 mf-3">
+                            <!-- <input
                 type="date"
                 id="daterecall"
                 formControlName="daterecall"
                 class="form-control"
-                placeholder="Ngày hẹn gọi lại"
-              />
-                <!-- <input formControlName="daterecall" matInput [matDatepicker]="picker" placeholder="Choose a date">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker ></mat-datepicker> -->
-            </div>
-            <div class="col-md-4 mf-3">
-              <select formControlName="statusCall" class="form-control">
-                <option [ngValue]="null" [disabled]="true">
+                placeholder="dd/MM/yyyy"
+                (change)="fomrmatdate($event)"
+              /> -->
+                            <input formControlName="daterecall" matInput [matDatepicker]="picker" placeholder="Choose a date">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </div>
+                        <div class="col-md-4 mf-3">
+                            <select formControlName="statusCall" class="form-control">
+                              <option value="" selected>
                   Tình trạng cuộc gọi
                 </option>
                 <option value="1">Chưa gọi</option>
                 <option value="2">Không liện lạc được</option>
                 <option value="3">Gọi thành công</option>
               </select>
-            </div>
-          </div>
-          <div class="row m-2">
-            <div class="col-md-4">
-              <input
-                type="text"
-                id="contractno"
-                name="contractno"
-                formControlName="contractno"
-                class="form-control rounded"
-                placeholder="Hợp đồng"
-              />
-            </div>
-            <div class="col-md-4 mf-3">
-              <select formControlName="cluster" class="form-control">
-                <option [ngValue]="null" [disabled]="true">ALL</option>
+                        </div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="col-md-4">
+                            <input type="text" id="contractno" name="contractno" formControlName="contractno" class="form-control rounded" placeholder="Hợp đồng" />
+                        </div>
+                        <div class="col-md-4 mf-3">
+                            <select formControlName="cluster" class="form-control">
+                              <option value="" selected>ALL</option>
                 <option value="1">Cluster 1</option>
                 <option value="2">Cluster 2</option>
                 <option value="3">Cluster 3</option>
               </select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <button (click)="onSubmit()" class="btn btn-primary">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-12 text-center">
+                            <button (click)="onSubmit()" class="btn btn-primary">
                 Tìm kiếm
               </button>
-              <button class="btn btn-primary" (click)="show()">Phân bổ</button>
-              <button (click)="export_excel()" class="btn btn-primary">
+                            <button class="btn btn-primary" (click)="show()">Phân bổ</button>
+                            <button (click)="export_excel()" class="btn btn-primary">
                 Kết xuất
               </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12 col-sm-12">
-        <div class="col-md-12 mf-3">
-          <table class="table table-striped table-bordered" #tableexport>
-            <thead class="thead-blue">
-              <tr>
-                <th colspan="8">1. Thông tin khách hàng</th>
-                <th colspan="8">2. Thông tin sản phẩm khách hàng</th>
-              </tr>
-              <tr scope="col">
-                <th>Cluster</th>
-                <th>Customer Name</th>
-                <th>CMND/CCCD/PP</th>
-                <th>Tình trạng KH</th>
-                <th>Phone</th>
-                <th>Age</th>
-                <th>Chi nhánh</th>
-                <th>Vùng</th>
-                <th>policy</th>
-                <th>Banca Product usage</th>
-                <th>IP</th>
-                <th>Lending balance</th>
-                <th>Deposit balance</th>
-                <th>Credit card limit</th>
-                <th>Preapprove Credit card limit</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let product of products; let i = index">
-                <td>{{ product.ProName}}</td>
-                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr' }}</td>
-                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr' }}</td>
-                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
-                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
-                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
-                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
-                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
-                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
-                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
-                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
-                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
-                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
-                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
-                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
-      </div>
-    </div>
-    <div
-      [style.display]="showModal ? 'block' : 'none'"
-      class="modal"
-      id="imagemodal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">Register</h4>
-          </div>
-          <div class="modal-body">
-            <!-- <app-product-form
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="col-md-12 mf-3">
+                    <table class="table table-striped table-bordered" #tableexport>
+                        <thead class="thead-blue">
+                            <tr>
+                                <th colspan="8">1. Thông tin khách hàng</th>
+                                <th colspan="8">2. Thông tin sản phẩm khách hàng</th>
+                            </tr>
+                            <tr scope="col">
+                                <th>Cluster</th>
+                                <th>Customer Name</th>
+                                <th>CMND/CCCD/PP</th>
+                                <th>Tình trạng KH</th>
+                                <th>Phone</th>
+                                <th>Age</th>
+                                <th>Chi nhánh</th>
+                                <th>Vùng</th>
+                                <th>policy</th>
+                                <th>Banca Product usage</th>
+                                <th>IP</th>
+                                <th>Lending balance</th>
+                                <th>Deposit balance</th>
+                                <th>Credit card limit</th>
+                                <th>Preapprove Credit card limit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of products; let i = index">
+                                <td>{{ product.ProName}}</td>
+                                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr' }}</td>
+                                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr' }}</td>
+                                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
+                                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
+                                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
+                                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
+                                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
+                                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
+                                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
+                                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
+                                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
+                                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
+                                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
+                                <td>{{ product.Price | currency:'VNĐ':'symbol':'4.2-2':'fr'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Register</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- <app-product-form
               (addSuccess)="closepopup($event)"
             ></app-product-form> -->
-            <app-uploadExcel (addSuccess)="closepopup($event)"></app-uploadExcel>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-dark"
-              data-dismiss="modal"
-              (click)="hide()"
-            >
+                        <app-uploadExcel (addSuccess)="closepopup($event)"></app-uploadExcel>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal" (click)="hide()">
               Close
             </button>
-          </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </mat-tab>
-  <mat-tab label="Chưa phân bổ">Chưa phân bổ</mat-tab>
+    </mat-tab>
+    <mat-tab label="Chưa phân bổ">Chưa phân bổ</mat-tab>
 </mat-tab-group>

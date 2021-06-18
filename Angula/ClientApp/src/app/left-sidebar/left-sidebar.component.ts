@@ -22,7 +22,9 @@ export class LeftSidebarComponent implements OnInit {
         if (obj.Message == "Success") {
           this.categories = JSON.parse(JSON.stringify(obj.Model));
         }
-      }, error => console.log(error));    
+      }, error => console.log(error));
   }
-
+  getSliderValue(event: any){
+    console.log(event.target.value);
+  }
 }

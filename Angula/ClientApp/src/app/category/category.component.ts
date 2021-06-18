@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PaginationInstance } from 'ngx-pagination';
@@ -41,11 +42,15 @@ export class CategoryComponent implements OnInit
   ngOnInit() {
     this.reloadData(this.config.itemsPerPage, this.config.currentPage);
   }
-  reloadData(pageSize: any, page: any) {
+  reloadData(pageSize: any, currentPage: any) {
     this.activeRoote.queryParams.subscribe(data => {
       let categoryId = data.categoryId;
       console.log("categoryId: " + categoryId);
-      this.productService.getproduct_in_keyword_category("", categoryId, pageSize, page)
+      let param = new HttpParams();
+      if(pageSize) param = param.append('pageSize',pageSize);
+      if(currentPage)  param = param.append('currentPage',currentPage);
+      if(categoryId) param = param.append('categoryId',categoryId);
+      this.productService.getproduct_in_keyword_category(param)
         .then(result => {
           var obj = JSON.parse(JSON.stringify(result));
           if (obj.Message == "Success") {

@@ -22,7 +22,7 @@ const routes: Routes = [
       { path: 'products/new', component: ProductFormComponent, canActivate: [AuthenticationService] },
       { path: 'products/new/:id', component: ProductFormComponent, canActivate: [AuthenticationService] },
       { path: 'products/:id', component: ProductFormComponent, canActivate: [AuthenticationService, AdminAuthGuard] },
-      { path: 'products', component: AdminProductsComponent, canActivate: [AuthenticationService] },
+      { path: 'products', component: AdminProductsComponent, canActivate: [AuthenticationService,AdminAuthGuard] },
       { path: 'orders', component: AdminOrdersComponent, canActivate: [AuthenticationService] },
       { path: 'URC', component: URCComponent }
     ]

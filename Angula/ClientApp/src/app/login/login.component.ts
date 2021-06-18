@@ -58,7 +58,10 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           if (data.Message == "Success") {
-            console.log(JSON.stringify(data.Result));
+            this.authenticationService.currentUserValue.subscribe(data => {
+              console.log("user: ");
+              console.log(data.Roles);
+            });
             this.router.navigate([this.returnUrl]);
           }
           else {
