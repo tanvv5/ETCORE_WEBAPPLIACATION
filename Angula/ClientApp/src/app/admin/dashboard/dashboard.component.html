@@ -1,29 +1,25 @@
 <h2>List User</h2>
 <ul class="heroes">
-  <li
-    *ngFor="let userRegister of UserRegisters"
-    (click)="onSelect(userRegister)"
-  >
-    <span class="badge">{{ userRegister.UserName }}</span
+    <li *ngFor="let userRegister of UserRegisters" (click)="onSelect(userRegister)">
+        <span class="badge">{{ userRegister.UserName }}</span
     >{{ userRegister.LastName }}
   </li>
 </ul>
 <div *ngIf="selecteduserRegister">
   <h2>{{ selecteduserRegister.UserName | uppercase }} Details</h2>
   <div><span>FirstName: </span>{{ selecteduserRegister.UserName }}</div>
-  <div>
-    <label>
+        <div>
+            <label>
       UserName:
       <input
         [(ngModel)]="selecteduserRegister.UserName"
         placeholder="UserName"
       />
     </label>
-  </div>
-</div>
-<div>
-  Pick your favorite hero (<label
-    ><input type="checkbox" checked (change)="showSad = !showSad" />show
+        </div>
+        </div>
+        <div>
+            Pick your favorite hero (<label><input type="checkbox" checked (change)="showSad = !showSad" />show
     nam</label
   >)
 </div>
@@ -44,7 +40,16 @@
   lay gia tri: {{ factor }} Super Hero Power:
   {{ abc.value | exponentialStrength: factor }}
 </p>
-
+<h2>Pick a highlight color</h2>
+<div>
+  <input type="radio" name="colors" (click)="color='lightgreen'">Green
+  <input type="radio" name="colors" (click)="color='yellow'">Yellow
+  <input type="radio" name="colors" (click)="color='cyan'">Cyan
+</div>
+<p [appHighlight]="color">Highlight me!</p>
+<div [@openClose]="isOpen ? true : false" class="open-close-container">
+  <p>open anomition</p>
+</div>
 <h2>Thêm mới item price trong formgroup</h2>
 <div class="row">
   <div class="col-md-6 mf-3">
@@ -90,80 +95,72 @@
     <form [formGroup]="DisCountForm" (ngSubmit)="onSubmitDiscount()">
       <div class="form-group">
         <label for="startDate">Last Name</label>
-        <input type="text" formControlName="startDate" [matDatepicker]="picker" class="form-control" [ngClass]="{ 'is-invalid': submitted_tl && fl.startDate.errors }" />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <div *ngIf="submitted_tl && fl.startDate.errors" class="invalid-feedback">
-          <div *ngIf="fl.startDate.errors.required">startDate is required</div>
+            <input type="text" formControlName="startDate" [matDatepicker]="picker" class="form-control" [ngClass]="{ 'is-invalid': submitted_tl && fl.startDate.errors }" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <div *ngIf="submitted_tl && fl.startDate.errors" class="invalid-feedback">
+                <div *ngIf="fl.startDate.errors.required">startDate is required</div>
+            </div>
         </div>
-      </div>
-      <table class="table table-bordered" formArrayName="levels">
-        <tr>
-          <th colspan="2">Add Multiple Quantity:</th>
-          <th width="150px">
-            <button
-              type="button"
-              (click)="addDiscount()"
-              class="btn btn-primary"
-            >
+        <table class="table table-bordered" formArrayName="levels">
+            <tr>
+                <th colspan="2">Add Multiple Quantity:</th>
+                <th width="150px">
+                    <button type="button" (click)="addDiscount()" class="btn btn-primary">
               Add More
             </button>
-          </th>
-        </tr>
-        <tr
-          *ngFor="let level of tl.controls; let i = index"
-          [formGroupName]="i"
-        >
-          <td>
-            sumTotal : {{ i }}
-            <input type="text" formControlName="sum" class="form-control" />
-            <div *ngIf="submitted_tl && level.controls.sum.errors" class="invalid-feedback">
-              <div *ngIf="level.controls.sum.errors?.required">
-                required
-              </div>
-              <div *ngIf="level.controls.sum.errors?.minlength">
-                tối thiểu 2 ký tự
-              </div>
-            </div>
-          </td>
-          <td>
-            Discount %:
-            <input type="text" formControlName="dis" class="form-control" />
-            <!-- <div *ngIf="submitted_tl && fl.dis.errors" class="invalid-feedback">
+                </th>
+            </tr>
+            <tr *ngFor="let level of tl.controls; let i = index" [formGroupName]="i">
+                <td>
+                    sumTotal : {{ i }}
+                    <input type="text" formControlName="sum" class="form-control" />
+                    <div *ngIf="submitted_tl && level.controls.sum.errors" class="invalid-feedback">
+                        <div *ngIf="level.controls.sum.errors?.required">
+                            required
+                        </div>
+                        <div *ngIf="level.controls.sum.errors?.minlength">
+                            tối thiểu 2 ký tự
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    Discount %:
+                    <input type="text" formControlName="dis" class="form-control" />
+                    <!-- <div *ngIf="submitted_tl && fl.dis.errors" class="invalid-feedback">
               <div *ngIf="fl.dis.errors?.min">
                 Minimum required number is 0.
               </div>
             </div> -->
-          </td>
-          <td>
-            <button (click)="removeDiscount(i)" class="btn btn-danger">
+                </td>
+                <td>
+                    <button (click)="removeDiscount(i)" class="btn btn-danger">
               Remove
             </button>
-          </td>
-        </tr>
-      </table>
-      <button type="submit" class="btn btn-success">Submit</button>
-    </form>
-    <br />
-    {{ this.DisCountForm.value | json }}
-  </div>
-  <div class="row">
-    <h2>Result Merge</h2>
-    <div class="col-md-12 mf-3">
-      <table>
-        <thead>
-          <th>Quantity</th>
-          <th>Price</th>
-          <th>sumTotal</th>
-          <th>Discount %</th>
-        </thead>
-        <tr *ngFor="let quantity of ResultList; let i = index">
-          <td>{{quantity.qty}}</td>
-          <td>{{quantity.price}}</td>
-          <td></td>
-          <td></td>
-        </tr>
-      </table>
-    </div>
-  </div>
-</div>
+                </td>
+            </tr>
+        </table>
+        <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+        <br /> {{ this.DisCountForm.value | json }}
+        </div>
+        <div class="row">
+            <h2>Result Merge</h2>
+            <div class="col-md-12 mf-3">
+                <table>
+                    <thead>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>sumTotal</th>
+                        <th>Discount %</th>
+                    </thead>
+                    <tr *ngFor="let quantity of ResultList; let i = index">
+                        <td>{{quantity.qty}}</td>
+                        <td>{{quantity.price}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        </div>

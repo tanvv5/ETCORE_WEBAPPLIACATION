@@ -51,6 +51,7 @@ import { URCComponent } from './admin/urc/urc.component';
 import { AsignWSComponent } from './admin/asign-ws/asign-ws.component'
 import { UploadExcelComponent } from './admin/urc/uploadExcel/uploadExcel.component';
 import { MomentDateModule } from '@angular/material-moment-adapter';
+import { HighlightDirective } from './_share/highlight.directive';
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
@@ -78,7 +79,8 @@ export const MY_DATE_FORMAT = {
     , AdminOrdersComponent, ProductFormComponent, AdminProductsComponent, EmptyCartComponent, CartLeftComponent, FooterComponent, ShopsComponent,
     ProductDetailComponent, LeftSidebarComponent, CategoryComponent, CheckoutComponent, SearchComponent, SearchformComponent, AuthComponent
     , DefaultComponent, DashboardComponent, AdminloginComponent, ExponentialStrengthPipe, UploadComponent, URCComponent, AsignWSComponent,
-    UploadExcelComponent
+    UploadExcelComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

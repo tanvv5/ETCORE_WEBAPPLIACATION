@@ -1,11 +1,19 @@
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { UserRegister } from '../../_models/user_register';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  animations: [
+    trigger('openClose', [
+      state('true', style({ height: '*' })),
+      state('false', style({ height: '0px' })),
+      transition('false <=> true', animate(5000))
+    ])
+  ]
 })
 export class DashboardComponent implements OnInit {
   productForm: FormGroup;
@@ -14,6 +22,9 @@ export class DashboardComponent implements OnInit {
   submitted_tl = false;
   ResultList: any;
   startDateModel: Date;
+  color = '';
+  isDisabled = false;
+  isOpen = false;
   UserRegisters: UserRegister[] = [
     { FirstName: "11", LastName: 'Tân Vũ', UserName: "Tân Vũ", Password: "11111" },
     { FirstName: "12", LastName: 'Mr. Nice', UserName: "Hùng", Password: "22222" },

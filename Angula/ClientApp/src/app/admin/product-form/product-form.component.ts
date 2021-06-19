@@ -96,7 +96,7 @@ export class ProductFormComponent implements OnInit {
               this.alertService.success("thêm mới sản phẩm thành công.", true);
               this.addSuccess.emit("true");
               this.uploadFiles(data.Result);
-              // this.router.navigate(['/admin/products']);
+              this.router.navigate(['/admin/products']);
             }
             else {
               console.log(JSON.stringify(data.Result));
