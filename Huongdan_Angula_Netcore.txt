@@ -1,0 +1,122 @@
+---------------------------------------------------
+1.Setup Node.js
+2. Lệnh trong Angula
+---------------------------------------------------
+lệnh khởi tạo
+---------------------------------------------------
+setup: 
+npm install -g @angular/cli (cài cli để dùng lệnh ng)
+npm install -g typescript  (cài đặt typescript)
+Tạo project(nếu tạo bằng visual studio rồi thì thôi) : ng new beginanular
+--npm install (cai thu viện ban đầu không cần nếu tạo project ng new)
+Di chuyển tới project:                   cd my-first-project
+lệnh mở code khi tạo xong project  code .
+run trình duyệt:                             ng serve --port 8080 
+lệnh xem netport đang chạy nếu port nào cần để tắt: netstat -a -o - n
+lệnh die port: taskkill /F /PID port cần die
+---------------------------------------------------
+Cấu trúc của Angula:
+---------------------------------------------------
+Index.html trang chủ nó sẽ có file typescript là main.ts
+
+thư mục app(chứa file ứng dụng)
+app.component.ts
+app.component.html (được tải sau file Index.html)
+app.module.ts (load toàn bộ commponent của dự án, cấu hình rootter và provider)
+app.server.module.ts
+---------------------------------------------------
+Build chạy production: ng build --prod <option>
+-----------------------------------
+Tạo component cơ bản
+---------------------------------------------------
+lệnh tạo commponent tổng quát
+ng g <schematic> [options]
+<schematic>	
+The schematic or collection:schematic to generate.
+
+This option can take one of the following sub-commands:
+
+app-shell
+application
+class
+component
+directive
+enum
+guard
+interceptor
+interface
+library
+module
+pipe
+resolver
+service
+service-worker
+web-worker
+------------------------------------------------------
+example: 
+ng g service services\customvalidate --skip-tests 
+ng g c admin\auth\adminlogin --module app --skip-tests
+ng g m admin\auth --module app --skip-tests
+--phạm vi của pipe được sử dụng function trong html
+ng g pipe exponential-strength --module app --skip-tests
+ng g directive _share\Highlight --module app --skip-tests
+(Selector=['name'],khi dùng trong component thì phải có name[] dùng tương tự như directive khác như [ngModel], 
+đặc biệt có thể dùng @INPUT nhưng name phải trùng với Selector)
+ng generate class.
+ng generate module.
+-------------------------------
+Setup package
+install: npm install jw-angular-pagination
+uninstall: npm uninstall jw-angular-pagination
+npm cache clean --force
+-------------------
+Cài bootstrap in angula8
+------------------------------
+npm install bootstrap --save
+npm install jquery --save
+npm install popper.js --save
+Tronfg file angular.json cấu hình
+"styles": [
+  "node_modules/bootstrap/dist/css/bootstrap.min.css",
+  "src/styles.css"
+],
+"scripts": [
+  "node_modules/jquery/dist/jquery.min.js",
+  "node_modules/bootstrap/dist/js/bootstrap.min.js"
+]
+-------------------------------
+6 cách để lấy giá trị của element in html
+https://www.cloudhadoop.com/angular-get-input-value-multiple-ways/
+cách 1
+trong file html: <input #myname>
+lấy ra trong cùng file html: myname.value
+cách 2
+hoặc dùng [(ngModel)]="username" thi trong file ts khai báo 1 biến tĩnh chứa nó private username: any;
+riêng thằng ngModel lấy ra trong cùng file html: {{username}}
+
+cách 3 dùng viewchild
+@ViewChild('myname') input; 
+console.log(this.input.nativeElement.value);
+cách 4: dùng formgroup
+cách 5: dùng $event
+<input type="text" (blur)="blurEvent($event)">
+blurEvent(event: any){
+    this.myusername = event.target.value;
+	this.file = event.target.files[0];
+  }
+------------------------------
+tao admin:
+1. ng add @angular/material
+2. npm i highcharts --save
+3. npm i @angular/flex-layout @angular/cdk --save
+----xuất excel-------------------
+npm i xlsx --save
+npm install file-saver --save
+---cài đặt thư viện bootstrapMD-------------
+npm install angular-bootstrap-md --save
+---------------------binding---------------
+The binding punctuation of [], (), [()], and the prefix specify the direction of data flow.
+
+Use [] to bind from source to view.
+Use () to bind from view to source.
+Use [()] to bind in a two way sequence of view to source to view
