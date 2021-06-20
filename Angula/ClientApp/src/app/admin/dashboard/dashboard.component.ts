@@ -2,17 +2,46 @@ import { FormGroup, FormBuilder, Validators, FormArray, FormControl, ValidationE
 import { Component, OnInit } from '@angular/core';
 import { UserRegister } from '../../_models/user_register';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-
+import { CurrencyPipe, DatePipe } from '@angular/common';
+import { MAT_DATE_FORMATS } from '@angular/material';
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  },
+};
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
   animations: [
     trigger('openClose', [
-      state('true', style({ height: '*' })),
-      state('false', style({ height: '0px' })),
-      transition('false <=> true', animate(5000))
-    ])
+      // ...
+      state('open', style({
+        height: '200px',
+        opacity: 1,
+        backgroundColor: 'yellow'
+      })),
+      state('closed', style({
+        height: '0px',
+        opacity: 0.8,
+        backgroundColor: '#c6ecff'
+      })),
+      transition('open => closed', [
+        animate('1s')
+      ]),
+      transition('closed => open', [
+        animate('1s')
+      ]),
+    ]),
+  ],
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },DatePipe,CurrencyPipe
   ]
 })
 export class DashboardComponent implements OnInit {
@@ -24,7 +53,7 @@ export class DashboardComponent implements OnInit {
   startDateModel: Date;
   color = '';
   isDisabled = false;
-  isOpen = false;
+  isOpen = true;
   UserRegisters: UserRegister[] = [
     { FirstName: "11", LastName: 'Tân Vũ', UserName: "Tân Vũ", Password: "11111" },
     { FirstName: "12", LastName: 'Mr. Nice', UserName: "Hùng", Password: "22222" },
@@ -43,6 +72,9 @@ export class DashboardComponent implements OnInit {
       startDate: [''],
       levels: new FormArray([this.newLevel()])
     });
+  }
+  toggle() {
+    this.isOpen = !this.isOpen;
   }
   newLevel() {
     return this.formbuild.group({

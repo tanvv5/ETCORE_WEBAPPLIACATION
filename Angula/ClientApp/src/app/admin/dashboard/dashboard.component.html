@@ -42,13 +42,36 @@
 </p>
 <h2>Pick a highlight color</h2>
 <div>
-  <input type="radio" name="colors" (click)="color='lightgreen'">Green
-  <input type="radio" name="colors" (click)="color='yellow'">Yellow
-  <input type="radio" name="colors" (click)="color='cyan'">Cyan
+  <input type="radio" name="colors" (click)="color = 'lightgreen'" />Green
+  <input type="radio" name="colors" (click)="color = 'yellow'" />Yellow
+  <input type="radio" name="colors" (click)="color = 'cyan'" />Cyan
 </div>
 <p [appHighlight]="color">Highlight me!</p>
-<div [@openClose]="isOpen ? true : false" class="open-close-container">
-  <p>open anomition</p>
+<nav>
+  <button (click)="toggle()">Toggle Open/Close</button>
+</nav>
+
+<div [@openClose]="isOpen ? 'open' : 'closed'" class="open-close-container">
+  <p>The box is now {{ isOpen ? "Open" : "Closed" }}!</p>
+</div>
+<p>
+  <button
+    class="btn btn-primary"
+    type="button"
+    data-toggle="collapse"
+    data-target="#collapseExample"
+    aria-expanded="false"
+    aria-controls="collapseExample"
+  >
+    Button with data-target
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+    richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes
+    anderson cred nesciunt sapiente ea proident.
+  </div>
 </div>
 <h2>Thêm mới item price trong formgroup</h2>
 <div class="row">
@@ -101,6 +124,7 @@
             <div *ngIf="submitted_tl && fl.startDate.errors" class="invalid-feedback">
                 <div *ngIf="fl.startDate.errors.required">startDate is required</div>
             </div>
+            <input type="date" class="form-control" data-date-format="dd/mm/yyyy" id="dp2" />
         </div>
         <table class="table table-bordered" formArrayName="levels">
             <tr>
@@ -116,9 +140,7 @@
                     sumTotal : {{ i }}
                     <input type="text" formControlName="sum" class="form-control" />
                     <div *ngIf="submitted_tl && level.controls.sum.errors" class="invalid-feedback">
-                        <div *ngIf="level.controls.sum.errors?.required">
-                            required
-                        </div>
+                        <div *ngIf="level.controls.sum.errors?.required">required</div>
                         <div *ngIf="level.controls.sum.errors?.minlength">
                             tối thiểu 2 ký tự
                         </div>
@@ -127,11 +149,11 @@
                 <td>
                     Discount %:
                     <input type="text" formControlName="dis" class="form-control" />
-                    <!-- <div *ngIf="submitted_tl && fl.dis.errors" class="invalid-feedback">
-              <div *ngIf="fl.dis.errors?.min">
-                Minimum required number is 0.
-              </div>
-            </div> -->
+                    <div *ngIf="submitted_tl && level.controls.dis.errors" class="invalid-feedback">
+                        <div *ngIf="level.controls.dis.errors?.required">
+                            Require
+                        </div>
+                    </div>
                 </td>
                 <td>
                     <button (click)="removeDiscount(i)" class="btn btn-danger">
@@ -155,8 +177,8 @@
                         <th>Discount %</th>
                     </thead>
                     <tr *ngFor="let quantity of ResultList; let i = index">
-                        <td>{{quantity.qty}}</td>
-                        <td>{{quantity.price}}</td>
+                        <td>{{ quantity.qty }}</td>
+                        <td>{{ quantity.price }}</td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -164,3 +186,10 @@
             </div>
         </div>
         </div>
+        <script type="text/javascript">
+            $(function() {
+                $('#dp2').datepicker({
+                    format: "dd/mm/yyyy"
+                });
+            });
+        </script>
